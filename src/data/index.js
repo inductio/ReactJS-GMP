@@ -1,3 +1,4 @@
+export const genres = ['All', 'Documentary', 'Comedy', 'Horror', 'Crime'];
 export const movies = [
     {
         "id": 337167,

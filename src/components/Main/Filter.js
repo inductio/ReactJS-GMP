@@ -1,32 +1,32 @@
 import React from 'react';
 import '../../styles/filter.scss';
-
+import {genres} from '../../data';
 
 class Filter extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedItem: 'All'
+            selectedItem: genres[0]
         };
+
+        this.regularClassName = 'filter-bar__item';
+        this.activeClassName = `${this.regularClassName} active`;
 
         this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick(item) {
-        this.setState({selectedItem: item});
+    handleClick(selectedGenre) {
+        this.setState({selectedItem: selectedGenre});
     }
 
     render() {
-        const genres = ['All', 'Documentary', 'Comedy', 'Horror', 'Crime'];
-        const regularItemClassName = 'filter-bar__item';
-        const activeItemClassName = `${regularItemClassName} active`;
         return (
             <ul className="filter-bar">
                 {genres.map(function (genre, index) {
                     return (
                         <li
                             key={index}
-                            className={genre === this.state.selectedItem ? activeItemClassName : regularItemClassName}
+                            className={genre === this.state.selectedItem ? this.activeClassName : this.regularClassName}
                             onClick={this.handleClick.bind(null, genre)}
                         >
                             {genre}
