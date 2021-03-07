@@ -3,6 +3,7 @@ import '../styles/common.scss';
 import Header from "./Header";
 import Main from './Main';
 import Footer from './Footer';
+import Modal from './Modal';
 
 class App extends React.PureComponent {
     render() {
@@ -11,6 +12,7 @@ class App extends React.PureComponent {
                 <Header/>
                 <Main/>
                 <Footer/>
+                <Modal show={true}>content</Modal>
             </React.Fragment>
         )
     }

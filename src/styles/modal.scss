@@ -1,0 +1,46 @@
+@import 'variables.scss';
+
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.72);
+
+	&__container {
+		position: absolute;
+		top: 20%;
+		left: 0;
+		right: 0;
+		margin: auto;
+		height: auto;
+		width: 50%;
+		min-height: 200px;
+		background-color: $color-dark-gray;
+		padding: 20px 30px;
+	}
+
+	&__close-btn {
+		position: absolute;
+		right: 8px;
+		top: 8px;
+		background: none;
+		border: 0;
+		height: 22px;
+		width: 22px;
+		cursor: pointer;
+		font-size: 22px;
+
+		&::after {
+			content: '✕';
+			position: absolute;
+			right: 0;
+			left: 0;
+			top: -5px;
+			bottom: 0;
+			margin: auto;
+			color: $color-white;
+		}
+	}
+}
