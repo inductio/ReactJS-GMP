@@ -12,7 +12,6 @@ class App extends React.PureComponent {
                 <Header/>
                 <Main/>
                 <Footer/>
-                <Modal show={true}>content</Modal>
             </React.Fragment>
         )
     }

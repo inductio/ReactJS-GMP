@@ -7,24 +7,26 @@
 	right: 0;
 	bottom: 0;
 	background-color: rgba(0, 0, 0, 0.72);
+	z-index: 9;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
 	&__container {
 		position: absolute;
-		top: 20%;
-		left: 0;
-		right: 0;
-		margin: auto;
 		height: auto;
 		width: 50%;
 		min-height: 200px;
 		background-color: $color-dark-gray;
 		padding: 20px 30px;
+		border-radius: 8px;
+		box-shadow: 0 0 36px $color-black;
 	}
 
 	&__close-btn {
 		position: absolute;
-		right: 8px;
-		top: 8px;
+		right: 18px;
+		top: 18px;
 		background: none;
 		border: 0;
 		height: 22px;
