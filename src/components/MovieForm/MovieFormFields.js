@@ -61,8 +61,9 @@ const MovieFormFields = ({movie}) => {
                         name={label}
                         id={`movie-form-id-${movieId}-${index}`}
                         className="movie-form__input"
+                        defaultValue={placeholder}
                     >
-                        <option selected disabled>{placeholder}</option>
+                        <option defaultValue={placeholder} disabled>{placeholder}</option>
                         {defaultValue.map((option, optionIndex) => (
                             <option key={optionIndex} value={option}>
                                 {option}
