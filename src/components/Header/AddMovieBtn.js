@@ -59,8 +59,11 @@ class AddMovieBtn extends React.Component {
                 <button
                     className="header__add-movie"
                     onClick={this.toggleModal.bind(this, true)}
-                >Add movie</button>
-                {this.state.isModalActive ?
+                >
+                    Add movie
+                </button>
+                {
+                    this.state.isModalActive ?
                     <Modal show={true} onModalClose={this.toggleModal.bind(this, false)}>
                         <MovieForm data={this.getAddMovieFormData()}/>
                     </Modal> :

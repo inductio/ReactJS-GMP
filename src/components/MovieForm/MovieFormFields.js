@@ -3,12 +3,32 @@ import React from 'react';
 const MovieFormFields = ({movie}) => {
     const {title, release_date, poster_path, genres, overview, runtime} = movie;
     const formFields = {title, release_date, poster_path, genres, overview, runtime};
-    const editLabels = ['Title', 'Release date', 'Movie URL', 'Genre', 'Overview', 'Runtime'];
+    const formLabels = [
+        {
+            label: 'Title',
+            placeholder: 'Add Movie\'s Name Here',
+        }, {
+            label: 'Release date',
+            placeholder: 'Select Date',
+        }, {
+            label: 'Movie URL',
+            placeholder: 'Movie URL here',
+        }, {
+            label: 'Genre',
+            placeholder: 'Select Genre'
+        }, {
+            label: 'Overview',
+            placeholder: 'Overview here'
+        }, {
+            label: 'Runtime',
+            placeholder: 'Runtime here'
+        }];
+
     const alignedMovie = Object.keys(formFields).map((field, index) => {
         let inputType;
         let typeOf = typeof formFields[field];
 
-        if (!isNaN(parseInt(formFields[field])) && typeOf === 'string' ) {
+        if (!isNaN(parseInt(formFields[field])) && typeOf === 'string') {
             inputType = 'date';
         } else if (typeOf === 'object') {
             inputType = 'select';
@@ -17,13 +37,14 @@ const MovieFormFields = ({movie}) => {
         }
 
         return {
-            label: editLabels[index],
+            label: formLabels[index].label,
+            placeholder: formLabels[index].placeholder,
             defaultValue: formFields[field],
             inputType,
         }
     });
 
-    return alignedMovie.map(( { label, defaultValue, inputType }, index) => {
+    return alignedMovie.map(({label, placeholder, defaultValue, inputType}, index) => {
         const movieId = movie.id || '';
         return (
             <React.Fragment key={index}>
@@ -41,6 +62,7 @@ const MovieFormFields = ({movie}) => {
                         id={`movie-form-id-${movieId}-${index}`}
                         className="movie-form__input"
                     >
+                        <option selected disabled>{placeholder}</option>
                         {defaultValue.map((option, optionIndex) => (
                             <option key={optionIndex} value={option}>
                                 {option}
@@ -52,6 +74,7 @@ const MovieFormFields = ({movie}) => {
                         type={inputType}
                         id={`movie-form-id-${movieId}-${index}`}
                         defaultValue={defaultValue}
+                        placeholder={placeholder}
                         className="movie-form__input"
                     />
                 }
