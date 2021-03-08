@@ -2,11 +2,15 @@ import React from 'react';
 import EditFields from './EditFields';
 import '../../styles/movieForm.scss';
 
-const Index = (props) => {
+const MovieForm = (props) => {
     const {type, movie} = props;
     return (
         <div className={`movie-form ${props.modalType}`}>
-            <h3 className="movie-form__header">{type.isEdit ? 'Edit movie' : 'Delete movie'}</h3>
+            <h3 className="movie-form__header">
+                {type.isEdit && 'Edit movie'}
+                {type.isDelete && 'Delete movie'}
+                {type.isAdd && 'Add movie'}
+            </h3>
             <form action="" className="movie-form__form">
                 {type.isEdit &&
                     <>
@@ -27,9 +31,14 @@ const Index = (props) => {
                         </div>
                     </>
                 }
+                {type.isAdd &&
+                    <>
+                        <p>Are you sure you want to add this movie?</p>
+                    </>
+                }
             </form>
         </div>
     )
 };
 
-export default Index;
+export default MovieForm;
