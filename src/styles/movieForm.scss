@@ -1,15 +1,18 @@
 @import 'variables.scss';
 
 .movie-form {
-
 	&__header {
 		font-weight: normal;
 		text-transform: uppercase;
-		font-size: 38px;
+		font-size: 28px;
 		margin: 0;
 	}
 
 	&__id {
+		&-title, &-value {
+			margin: 4px 0;
+		}
+
 		&-title {
 			color: $color-red;
 			text-transform: uppercase;
@@ -28,7 +31,8 @@
 	&__label {
 		color: $color-red;
 		text-transform: uppercase;
-		margin: 20px 0 8px;
+		margin: 16px 0 8px;
+		font-weight: bold;
 	}
 
 	&__input {
@@ -44,7 +48,7 @@
 	&__buttons {
 		display: flex;
 		justify-content: flex-end;
-		margin: 40px 0 20px;
+		margin: 20px 0;
 	}
 
 	&__btn {
@@ -58,12 +62,12 @@
 		cursor: pointer;
 	}
 
-	&__save {
+	&__submit {
 		background-color: $color-red;
 		color: $color-white;
 	}
 
-	&__reset {
+	&__decline {
 		background-color: transparent;
 		color: $color-red;
 		border: 1px solid $color-red;
