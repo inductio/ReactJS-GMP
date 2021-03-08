@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from '../Modal';
 import MovieForm from '../MovieForm';
+import MovieFormFields from '../MovieForm/MovieFormFields';
 
 class AddMovieBtn extends React.Component {
     constructor(props) {
@@ -15,6 +16,43 @@ class AddMovieBtn extends React.Component {
         this.setState({isModalActive});
     }
 
+    getAddMovieFormFields() {
+        return {
+            title: '',
+            release_date: new Date().toLocaleDateString(),
+            poster_path: '',
+            overview: '',
+            genres: [
+                'Action',
+                'Adventure',
+                'Comedy',
+                'Crime',
+                'Documentary',
+                'Family',
+                'Horror'
+            ],
+            runtime: ''
+        }
+    }
+
+    getAddMovieFormData() {
+        return {
+            buttons: [
+                {
+                    type: 'reset',
+                    title: 'Reset',
+                },
+                {
+                    type: 'submit',
+                    title: 'Submit'
+                }],
+            formTitle: 'Add Movie',
+            action: 'add',
+            formFields: <MovieFormFields movie={this.getAddMovieFormFields()}/>,
+            descriptions: []
+        }
+    }
+
     render () {
         return (
             <>
@@ -24,7 +62,7 @@ class AddMovieBtn extends React.Component {
                 >Add movie</button>
                 {this.state.isModalActive ?
                     <Modal show={true} onModalClose={this.toggleModal.bind(this, false)}>
-                        <MovieForm type={{isAdd: true}} movie={{}}/>
+                        <MovieForm data={this.getAddMovieFormData()}/>
                     </Modal> :
                     null
                 }

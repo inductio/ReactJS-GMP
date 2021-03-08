@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from '../Modal';
-import EditFields from '../MovieForm/EditFields';
+import MovieFormFields from '../MovieForm/MovieFormFields';
 import MovieForm from '../MovieForm';
 
 class MovieCardMenu extends React.Component {
@@ -48,7 +48,7 @@ class MovieCardMenu extends React.Component {
                 }],
             formTitle: 'Edit Movie',
             action: 'edit',
-            formFields: <EditFields movie={this.props.movie}/>,
+            formFields: <MovieFormFields movie={this.props.movie}/>,
             descriptions: [
                 {text: 'Movie Id', className: 'movie-form__id-title'},
                 {text: this.props.movie.id, className: 'movie-form__id-value'}
@@ -68,7 +68,7 @@ class MovieCardMenu extends React.Component {
             formFields: null,
             action: 'delete',
             descriptions: [
-                {text: 'Are you sure you want to delete this movie?', className: 'movie-form__id-title'}
+                {text: 'Are you sure you want to delete this movie?', className: ''}
             ]
         }
     }
