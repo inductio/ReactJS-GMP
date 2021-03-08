@@ -1,5 +1,4 @@
 import React from 'react';
-import MovieForm from '../MovieForm';
 import '../../styles/modal.scss';
 
 class Modal extends React.Component {
@@ -26,7 +25,7 @@ class Modal extends React.Component {
                 <div className="modal__container">
                     <button className="modal__close-btn" onClick={this.toggleModal.bind(this, false)}/>
                     <div className="modal__content">
-                        <MovieForm type={this.props.type} movie={this.props.movie}/>
+                        {this.props.children}
                     </div>
                 </div>
             </div>
