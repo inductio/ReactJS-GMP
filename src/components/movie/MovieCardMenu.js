@@ -8,14 +8,14 @@ class MovieCardMenu extends React.Component {
         super(props);
         this.state = {
             isMenuActive: false,
-            form: null
+            formType: ''
         };
     }
 
-    showModal = (form) => {
+    showModal = (formType) => {
         this.setState({
             showModal: true,
-            form
+            formType
         });
     };
 
@@ -25,6 +25,13 @@ class MovieCardMenu extends React.Component {
         });
     };
 
+    getForm = () => {
+     const typesMap = {};
+        typesMap['edit'] = <EditMovieForm movie={this.props.movie}/>;
+        typesMap['delete'] = <DeleteMovieForm movie={this.props.movie}/>;
+        return typesMap[this.state.formType];
+    };
+
     render() {
         return (
             <div className={this.state.isMenuActive ? 'movie-card__menu active' : 'movie-card__menu'}>
@@ -32,12 +39,12 @@ class MovieCardMenu extends React.Component {
                 <div className={this.state.isMenuActive ? 'movie-card__menu-popup active' : 'movie-card__menu-popup'}>
                     <ul className="movie-card__menu-popup-list">
                         <li className="movie-card__menu-popup-list-item"
-                            onClick={() => this.showModal(<EditMovieForm movie={this.props.movie}/>)}
+                            onClick={() => this.showModal('edit')}
                         >
                             Edit
                         </li>
                         <li className="movie-card__menu-popup-list-item"
-                            onClick={() => this.showModal(<DeleteMovieForm movie={this.props.movie}/>)}
+                            onClick={() => this.showModal('delete')}
                         >
                             Delete
                         </li>
@@ -46,7 +53,7 @@ class MovieCardMenu extends React.Component {
                 </div>
                 {this.state.showModal ?
                     <Modal onModalClose={this.onModalClose}>
-                        {this.state.form}
+                        {this.getForm()}
                     </Modal> :
                     null
                 }
