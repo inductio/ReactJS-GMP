@@ -11,29 +11,25 @@ class MovieCardMenu extends React.Component {
             formData: null,
             modalType: null
         };
-
-        this.toggleMenuPopup = this.toggleMenuPopup.bind(this);
-        this.showModal = this.showModal.bind(this);
-        this.onModalClose = this.onModalClose.bind(this);
     }
 
-    toggleMenuPopup(isMenuActive) {
+    toggleMenuPopup = (isMenuActive) => {
         this.setState({isMenuActive});
-    }
+    };
 
-    showModal(formData) {
+    showModal = (formData) => {
         this.setState({
             showModal: true,
             formData
         });
-    }
+    };
 
-    onModalClose() {
+    onModalClose = () => {
         this.setState({
             modalType: null,
             showModal: false
         });
-    }
+    };
 
     getEditFormData() {
         return {
@@ -76,24 +72,24 @@ class MovieCardMenu extends React.Component {
     render() {
         return (
             <div className={this.state.isMenuActive ? 'movie-card__menu active' : 'movie-card__menu'}>
-                <button className="movie-card__menu-open-btn" onClick={this.toggleMenuPopup.bind(this, true)}/>
+                <button className="movie-card__menu-open-btn" onClick={() => this.toggleMenuPopup( true)}/>
                 <div className={this.state.isMenuActive ? 'movie-card__menu-popup active' : 'movie-card__menu-popup'}>
                     <ul className="movie-card__menu-popup-list">
                         <li className="movie-card__menu-popup-list-item"
-                            onClick={this.showModal.bind(this, this.getEditFormData())}
+                            onClick={() => this.showModal(this.getEditFormData())}
                         >
                             Edit
                         </li>
                         <li className="movie-card__menu-popup-list-item"
-                            onClick={this.showModal.bind(this, this.getDeleteFormData())}
+                            onClick={() => this.showModal(this.getDeleteFormData())}
                         >
                             Delete
                         </li>
                     </ul>
-                    <button className="movie-card__menu-close-btn" onClick={this.toggleMenuPopup.bind(this, false)}/>
+                    <button className="movie-card__menu-close-btn" onClick={() => this.toggleMenuPopup(false)}/>
                 </div>
                 {this.state.showModal ?
-                    <Modal onModalClose={this.onModalClose.bind(this)}>
+                    <Modal onModalClose={this.onModalClose}>
                         <MovieForm data={this.state.formData}/>
                     </Modal> :
                     null

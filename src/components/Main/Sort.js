@@ -4,13 +4,12 @@ import '../../styles/sort.scss';
 class Sort extends React.Component {
     constructor(props) {
         super(props);
-        this.onSort = this.onSort.bind(this);
 
         //Default sorting
         this.props.sort(this.sortByDate(this.props.movies));
     }
 
-    onSort(e) {
+    onSort = (e) => {
         let movies;
         const value = e.target.value;
 
@@ -27,7 +26,7 @@ class Sort extends React.Component {
         }
 
         this.props.sort(movies)
-    }
+    };
 
     sortByDate(movies) {
         return movies.sort((a, b) => {

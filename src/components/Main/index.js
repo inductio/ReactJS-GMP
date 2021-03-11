@@ -14,16 +14,6 @@ class Main extends React.Component {
         this.state = {
             movies: movies
         };
-        this.toggleModal = this.toggleModal.bind(this);
-        this.sortMovies = this.sortMovies.bind(this);
-    }
-
-    toggleModal(isModalActive) {
-        this.setState({isModalActive});
-    }
-
-    sortMovies(movies) {
-        this.setState({movies})
     }
 
     render() {
@@ -31,7 +21,7 @@ class Main extends React.Component {
             <main className="main">
                 <div className="menu">
                     <Filter/>
-                    <Sort sort={this.sortMovies.bind(this)} movies={this.state.movies}/>
+                    <Sort sort={() => this.setState({movies})} movies={this.state.movies}/>
                 </div>
                 <div className="movies">
                     <MoviesCounter counter={movies.length} />
