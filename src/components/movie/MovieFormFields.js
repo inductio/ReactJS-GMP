@@ -1,9 +1,8 @@
 import React from 'react';
+import { normalizeMovieFormFields } from '../utils/normalizeMovieFormFields';
 import FormFields from '../form/FormFields';
 
 const MovieFormFields = ({movie}) => {
-    const {title, release_date, poster_path, genres, overview, runtime} = movie;
-    const formFields = {title, release_date, poster_path, genres, overview, runtime};
     const formInputs = [
         {
             label: 'Title',
@@ -31,16 +30,7 @@ const MovieFormFields = ({movie}) => {
             inputType: 'number',
         }];
 
-    const normalizedMovie = Object.keys(formFields).map((field, index) => {
-        return {
-            label: formInputs[index].label,
-            placeholder: formInputs[index].placeholder,
-            defaultValue: formFields[field],
-            inputType: formInputs[index].inputType
-        }
-    });
-
-    return <FormFields fields={normalizedMovie} />
+    return <FormFields fields={normalizeMovieFormFields(movie, formInputs)} />
 };
 
 export default MovieFormFields;
