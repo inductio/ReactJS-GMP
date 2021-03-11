@@ -64,7 +64,7 @@ class AddMovieBtn extends React.Component {
                 </button>
                 {
                     this.state.isModalActive ?
-                    <Modal show={true} onModalClose={this.toggleModal.bind(this, false)}>
+                    <Modal onModalClose={this.toggleModal.bind(this, false)}>
                         <MovieForm data={this.getAddMovieFormData()}/>
                     </Modal> :
                     null

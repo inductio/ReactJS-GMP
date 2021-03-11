@@ -93,10 +93,7 @@ class MovieCardMenu extends React.Component {
                     <button className="movie-card__menu-close-btn" onClick={this.toggleMenuPopup.bind(this, false)}/>
                 </div>
                 {this.state.showModal ?
-                    <Modal
-                        show={true}
-                        onModalClose={this.onModalClose.bind(this)}
-                    >
+                    <Modal onModalClose={this.onModalClose.bind(this)}>
                         <MovieForm data={this.state.formData}/>
                     </Modal> :
                     null
