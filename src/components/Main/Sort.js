@@ -4,28 +4,23 @@ import '../../styles/sort.scss';
 class Sort extends React.Component {
     constructor(props) {
         super(props);
+    }
 
+    componentDidMount() {
         //Default sorting
         this.props.sort(this.sortByDate(this.props.movies));
     }
 
     onSort = (e) => {
-        let movies;
         const value = e.target.value;
+        const sortMapStrategy = new Map([
+            ['Release Date', () => this.sortByDate(this.props.movies)],
+            ['Rating', () => this.sortByRating(this.props.movies)],
+            ['Runtime', () => this.sortByRuntime(this.props.movies)]
+        ]);
 
-        if (value === 'Release Date') {
-            movies = this.sortByDate(this.props.movies)
-        }
-
-        if (value === 'Rating') {
-            movies = this.sortByRating(this.props.movies)
-        }
-
-        if (value === 'Runtime') {
-            movies = this.sortByRuntime(this.props.movies)
-        }
-
-        this.props.sort(movies)
+        const movies = sortMapStrategy.get(value)();
+        this.props.sort(movies);
     };
 
     sortByDate(movies) {
@@ -46,13 +41,14 @@ class Sort extends React.Component {
         })
     }
 
+    getOptions = () => ['Release Date', 'Rating', 'Runtime'];
+
     render() {
-        const options = ['Release Date', 'Rating', 'Runtime'];
         return (
             <div className="sort">
                 <label htmlFor="sort__select" className="sort__label">Sort By</label>
                 <select name="sort" id="sort__select" className="sort__select" onChange={this.onSort}>
-                    {options.map(function (option, index) {
+                    {this.getOptions().map(function (option, index) {
                         return <option key={index} name={option}>{option}</option>
                     })}
                 </select>

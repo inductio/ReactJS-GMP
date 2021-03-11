@@ -3,44 +3,39 @@ import React from 'react';
 const MovieFormFields = ({movie}) => {
     const {title, release_date, poster_path, genres, overview, runtime} = movie;
     const formFields = {title, release_date, poster_path, genres, overview, runtime};
-    const formLabels = [
+    const formInputs = [
         {
             label: 'Title',
             placeholder: 'Add Movie\'s Name Here',
+            inputType: 'text',
         }, {
             label: 'Release date',
             placeholder: 'Select Date',
+            inputType: 'date',
         }, {
             label: 'Movie URL',
             placeholder: 'Movie URL here',
+            inputType: 'text',
         }, {
             label: 'Genre',
-            placeholder: 'Select Genre'
+            placeholder: 'Select Genre',
+            inputType: 'select',
         }, {
             label: 'Overview',
-            placeholder: 'Overview here'
+            placeholder: 'Overview here',
+            inputType: 'text',
         }, {
             label: 'Runtime',
-            placeholder: 'Runtime here'
+            placeholder: 'Runtime here',
+            inputType: 'number',
         }];
 
     const alignedMovie = Object.keys(formFields).map((field, index) => {
-        let inputType;
-        let typeOf = typeof formFields[field];
-
-        if (!isNaN(parseInt(formFields[field])) && typeOf === 'string') {
-            inputType = 'date';
-        } else if (typeOf === 'object') {
-            inputType = 'select';
-        } else {
-            inputType = 'text';
-        }
-
         return {
-            label: formLabels[index].label,
-            placeholder: formLabels[index].placeholder,
+            label: formInputs[index].label,
+            placeholder: formInputs[index].placeholder,
             defaultValue: formFields[field],
-            inputType,
+            inputType: formInputs[index].inputType
         }
     });
 
