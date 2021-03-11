@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from '../Modal';
-import AddMovieForm from './AddMovieForm';
+import AddMovieForm from '../movie/AddMovieForm';
 
 class AddMovie extends React.Component {
     constructor(props) {

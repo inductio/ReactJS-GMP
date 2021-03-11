@@ -8,8 +8,7 @@ class MovieCardMenu extends React.Component {
         super(props);
         this.state = {
             isMenuActive: false,
-            form: null,
-            modalType: null
+            form: null
         };
     }
 
@@ -22,7 +21,6 @@ class MovieCardMenu extends React.Component {
 
     onModalClose = () => {
         this.setState({
-            modalType: null,
             showModal: false
         });
     };

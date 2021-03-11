@@ -13,10 +13,6 @@ class Filter extends React.Component {
         this.activeClassName = `${this.regularClassName} active`;
     }
 
-    handleClick = (selectedGenre) => {
-        this.setState({selectedItem: selectedGenre});
-    };
-
     render() {
         return (
             <ul className="filter-bar">
@@ -25,7 +21,7 @@ class Filter extends React.Component {
                         <li
                             key={index}
                             className={genre === this.state.selectedItem ? this.activeClassName : this.regularClassName}
-                            onClick={() => this.handleClick(genre)}
+                            onClick={() => this.setState({selectedItem: genre})}
                         >
                             {genre}
                         </li>

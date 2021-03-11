@@ -1,6 +1,6 @@
 import React from 'react';
 import Form from '../form/Form';
-import MovieFormFields from '../movie/MovieFormFields';
+import MovieFormFields from './MovieFormFields';
 
 const AddMovieForm = () => {
     const movieFields = {

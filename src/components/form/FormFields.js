@@ -1,43 +1,30 @@
 import React from 'react';
+import FormLabel from './FormLabel';
+import FormSelect from './FormSelect';
+import FormInput from './FormInput';
 
 const FormFields = ({fields}) => {
-    return fields.map(({label, placeholder, defaultValue, inputType}, index) => {
-        return (
-            <React.Fragment key={index}>
-                <label
-                    key={`label-${index}`}
-                    htmlFor={`movie-form-id-${index}`}
-                    className="movie-form__label"
-                >
-                    {label}
-                </label>
-                {inputType === 'select' ?
-                    <select
-                        key={`select-${index}`}
-                        name={label}
-                        id={`movie-form-id-${index}`}
-                        className="movie-form__input"
-                        defaultValue={placeholder}
-                    >
-                        <option defaultValue={placeholder} disabled>{placeholder}</option>
-                        {defaultValue.map((option, optionIndex) => (
-                            <option key={optionIndex} value={option}>
-                                {option}
-                            </option>
-                        ))}
-                    </select> :
-                    <input
-                        key={`input-${index}`}
-                        type={inputType}
-                        id={`movie-form-id-${index}`}
-                        defaultValue={defaultValue}
-                        placeholder={placeholder}
-                        className="movie-form__input"
-                    />
-                }
-            </React.Fragment>
-        )
-    })
+    return fields.map((field, index) => (
+        <React.Fragment key={index}>
+            <FormLabel
+                key={`label-${index}`}
+                index={index}
+                label={field.label}
+            />
+            {field.inputType === 'select' ?
+                <FormSelect
+                    key={`select-${index}`}
+                    index={index}
+                    field={field}
+                /> :
+                <FormInput
+                    key={`input-${index}`}
+                    index={index}
+                    field={field}
+                />
+            }
+        </React.Fragment>
+    ))
 };
 
 export default FormFields;

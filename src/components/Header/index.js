@@ -1,7 +1,7 @@
 import React from 'react';
 import Logo from './../common/Logo';
 import HeaderTitle from './HeaderTitle';
-import AddMovie from './../AddMovie';
+import AddMovie from './AddMovie';
 import Search from './Search';
 import '../../styles/header.scss'
 
