@@ -1,35 +1,25 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../../styles/filter.scss';
 import {genres} from '../../data';
 
-class Filter extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            selectedItem: genres[0]
-        };
+const Filter = () => {
+    const [activeFilter, setFilter] = useState(genres[0]);
+    const regularClassName = 'filter-bar__item';
+    const activeClassName = `${regularClassName} active`;
 
-        this.regularClassName = 'filter-bar__item';
-        this.activeClassName = `${this.regularClassName} active`;
-    }
-
-    render() {
-        return (
-            <ul className="filter-bar">
-                {genres.map(function (genre, index) {
-                    return (
-                        <li
-                            key={index}
-                            className={genre === this.state.selectedItem ? this.activeClassName : this.regularClassName}
-                            onClick={() => this.setState({selectedItem: genre})}
-                        >
-                            {genre}
-                        </li>
-                    )
-                }, this)}
-            </ul>
-        )
-    }
-}
+    return (
+        <ul className="filter-bar">
+            {genres.map((genre, index) => (
+                <li
+                    key={index}
+                    className={genre === activeFilter ? activeClassName : regularClassName}
+                    onClick={() => setFilter(genre)}
+                >
+                    {genre}
+                </li>
+            ))}
+        </ul>
+    )
+};
 
 export default Filter;

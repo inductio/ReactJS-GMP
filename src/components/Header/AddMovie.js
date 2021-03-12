@@ -1,34 +1,25 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Modal from '../Modal';
 import AddMovieForm from '../movie/AddMovieForm';
 
-class AddMovie extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isModalActive: false
-        };
-    }
-
-    render () {
-        return (
-            <>
-                <button
-                    className="header__add-movie"
-                    onClick={() => this.setState({isModalActive: true})}
-                >
-                    Add movie
-                </button>
-                {
-                    this.state.isModalActive ?
-                    <Modal onModalClose={() => this.setState({isModalActive: false})}>
-                        <AddMovieForm/>
-                    </Modal> :
-                    null
-                }
-            </>
-        )
-    }
-}
+const AddMovie = () => {
+    const [isModalVisible, setModalVisibility] = useState(false);
+    const useToggleModal = () => setModalVisibility(!isModalVisible);
+    return (
+        <>
+            <button
+                className="header__add-movie"
+                onClick={useToggleModal}
+            >
+                Add movie
+            </button>
+            {isModalVisible &&
+                <Modal onModalClose={useToggleModal}>
+                    <AddMovieForm/>
+                </Modal>
+            }
+        </>
+    )
+};
 
 export default AddMovie;

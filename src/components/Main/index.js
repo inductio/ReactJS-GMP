@@ -9,12 +9,7 @@ import '../../styles/movies.scss';
 import '../../styles/menu.scss';
 
 class Main extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            movies: movies
-        };
-    }
+    state = {movies};
 
     render() {
         return (

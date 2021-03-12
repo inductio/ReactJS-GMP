@@ -1,65 +1,48 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Modal from '../Modal';
 import EditMovieForm from './EditMovieForm';
 import DeleteMovieForm from './DeleteMovieForm';
+import MovieCardMenuItem from './MovieCardMenuItem';
+const menu = ['Edit', 'Delete'];
 
-class MovieCardMenu extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isMenuActive: false,
-            formType: ''
-        };
-    }
+const MovieCardMenu = (props) => {
+    const [isModalVisible, setModalVisibility] = useState(false);
+    const [isMenuVisible, setMenuVisibility] = useState(false);
+    const [formType, setFormType] = useState('');
 
-    showModal = (formType) => {
-        this.setState({
-            showModal: true,
-            formType
-        });
+    const useToggleModal = () => setModalVisibility(!isModalVisible);
+    const useToggleMenu = () => setMenuVisibility(!isMenuVisible);
+
+    const useShowModal = (formType) => {
+        setFormType(formType);
+        useToggleModal();
     };
 
-    onModalClose = () => {
-        this.setState({
-            showModal: false
-        });
+    const getForm = () => {
+        const typesMap = {};
+        typesMap['Edit'] = <EditMovieForm {...props}/>;
+        typesMap['Delete'] = <DeleteMovieForm {...props}/>;
+        return typesMap[formType];
     };
 
-    getForm = () => {
-     const typesMap = {};
-        typesMap['edit'] = <EditMovieForm movie={this.props.movie}/>;
-        typesMap['delete'] = <DeleteMovieForm movie={this.props.movie}/>;
-        return typesMap[this.state.formType];
-    };
-
-    render() {
-        return (
-            <div className={this.state.isMenuActive ? 'movie-card__menu active' : 'movie-card__menu'}>
-                <button className="movie-card__menu-open-btn" onClick={() => this.setState({isMenuActive: true})}/>
-                <div className={this.state.isMenuActive ? 'movie-card__menu-popup active' : 'movie-card__menu-popup'}>
+    return (
+        <div className="movie-card__menu">
+            <button className="movie-card__menu-open-btn" onClick={useToggleMenu}/>
+            {isMenuVisible && (
+                <div className="movie-card__menu-popup">
                     <ul className="movie-card__menu-popup-list">
-                        <li className="movie-card__menu-popup-list-item"
-                            onClick={() => this.showModal('edit')}
-                        >
-                            Edit
-                        </li>
-                        <li className="movie-card__menu-popup-list-item"
-                            onClick={() => this.showModal('delete')}
-                        >
-                            Delete
-                        </li>
+                        {menu.map(item => <MovieCardMenuItem key={item} onClick={() => useShowModal(item)} title={item}/>)}
                     </ul>
-                    <button className="movie-card__menu-close-btn" onClick={() => this.setState({isMenuActive: false})}/>
+                    <button className="movie-card__menu-close-btn" onClick={useToggleMenu}/>
                 </div>
-                {this.state.showModal ?
-                    <Modal onModalClose={this.onModalClose}>
-                        {this.getForm()}
-                    </Modal> :
-                    null
-                }
-            </div>
-        )
-    }
-}
+            )}
+            {isModalVisible && (
+                <Modal onModalClose={useToggleModal}>
+                    {getForm()}
+                </Modal>
+            )}
+        </div>
+    )
+};
 
 export default MovieCardMenu;

@@ -9,7 +9,7 @@ const Header = () => {
     return (
         <header className="header">
             <Logo/>
-            <HeaderTitle/>
+            <HeaderTitle title={'Find your movie'}/>
             <AddMovie/>
             <Search/>
         </header>

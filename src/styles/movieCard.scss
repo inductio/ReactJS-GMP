@@ -74,11 +74,7 @@
 			position: absolute;
 			top: -2px;
 			right: -2px;
-			display: none;
-
-			&.active {
-				display: block;
-			}
+			display: block;
 		}
 
 		&-popup-list {
