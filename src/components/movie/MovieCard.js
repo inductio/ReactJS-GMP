@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import MovieCardMenu from './MovieCardMenu';
 import '../../styles/movieCard.scss';
 
 class MovieCard extends React.PureComponent {
@@ -17,6 +18,7 @@ class MovieCard extends React.PureComponent {
                     <div className="movie-card__category">{genres[0]}</div>
                     <div className="movie-card__year">{parseInt(release_date)}</div>
                 </div>
+                <MovieCardMenu movie={this.props.movie}/>
             </div>
         )
     }

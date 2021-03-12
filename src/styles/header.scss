@@ -6,7 +6,8 @@
 	padding: 100px 120px 0;
 	margin: 8px 0;
 	background-color: $color-dark-gray;
-	z-index: 0;
+	z-index: 2;
+	overflow: hidden;
 
 	&::before, &::after {
 		content: '';
@@ -20,6 +21,7 @@
 
 	&::before {
 		background-image: url('../images/header-background.jpg');
+		filter: blur(4px);
 	}
 
 	&::after {

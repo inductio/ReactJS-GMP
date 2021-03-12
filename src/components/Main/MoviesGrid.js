@@ -1,5 +1,5 @@
 import React from 'react';
-import MovieCard from './MovieCard';
+import MovieCard from '../movie/MovieCard';
 
 const MoviesGrid = (props) => {
     const moviesGrid = props.movies.map((movie) => {
