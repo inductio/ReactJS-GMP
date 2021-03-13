@@ -3,15 +3,23 @@ import Logo from './../common/Logo';
 import HeaderTitle from './HeaderTitle';
 import AddMovie from './AddMovie';
 import Search from './Search';
+import MovieDetails from '../movie/MovieDetails';
 import '../../styles/header.scss'
 
-const Header = () => {
+const Header = (props) => {
     return (
         <header className="header">
-            <Logo/>
-            <HeaderTitle title={'Find your movie'}/>
-            <AddMovie/>
-            <Search/>
+            {props.selectedMovie ?
+                <>
+                    <MovieDetails {...props}/>
+                </>:
+                <>
+                    <Logo/>
+                    <HeaderTitle title={'Find your movie'}/>
+                    <AddMovie/>
+                    <Search/>
+                </>
+            }
         </header>
     )
 };

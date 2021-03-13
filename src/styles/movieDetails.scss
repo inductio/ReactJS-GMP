@@ -1,0 +1,76 @@
+@import 'variables.scss';
+
+.movie-details {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	margin: -100px -120px 0;
+	padding: 70px 56px 20px;
+	border-radius: 8px;
+	background-color: rgb(0 0 0 / 55%);
+
+	&__img {
+		width: 270px;
+	}
+
+	&__description {
+		display: flex;
+		flex-direction: column;
+		margin-left: 50px;
+	}
+
+	&__title {
+		font-size: 36px;
+		line-height: 60px;
+		font-weight: normal;
+		margin: 0 0 16px;
+	}
+
+	&__rating {
+		display: inline-block;
+		font-size: 26px;
+		height: 60px;
+		width: 60px;
+		border-radius: 50%;
+		border: 1px solid $color-white;
+		color: #7bb055;
+		text-align: center;
+	}
+
+	&__tagline {
+		font-size: .875rem;
+	}
+
+	&__numbers {
+		margin: 24px 0;
+		color: $color-red;
+		font-size: 24px;
+	}
+
+	&__date {
+		padding-right: 36px;
+	}
+
+	&__overview {
+		line-height: 24px;
+	}
+
+	&__back {
+		position: absolute;
+		top: 10px;
+		right: 20px;
+		border: 0;
+		background: none;
+		height: 40px;
+		width: 40px;
+		cursor: pointer;
+
+		&:after {
+			content: '⚲';
+			display: block;
+			color: $color-red;
+			font-size: 40px;
+			transform: rotate(40deg);
+		}
+	}
+}

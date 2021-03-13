@@ -6,7 +6,7 @@ import '../../styles/movieCard.scss';
 const MovieCard = (props) => {
     const {title, release_date, genres, poster_path} = props.movie;
     return (
-        <div className="movie-card">
+        <div className="movie-card" data-id={props.movie.id}>
             <img
                 className="movie-card__img"
                 src={poster_path}
