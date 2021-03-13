@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import '../styles/common.scss';
 import Header from "./Header";
 import Main from './Main';
@@ -6,6 +6,8 @@ import Footer from './Footer';
 
 const App = () => {
     const [selectedMovie, setMovie] = useState(null);
+    const useSelectMovie = useCallback(movie => setMovie(movie), [selectedMovie]);
+
     useEffect(() => {
         window.scroll({
             top: 0,
@@ -17,7 +19,7 @@ const App = () => {
     return (
         <React.Fragment>
             <Header selectedMovie={selectedMovie} backToSearch={() => setMovie(null)}/>
-            <Main onCardClick={movie => setMovie(movie)}/>
+            <Main onCardClick={useSelectMovie}/>
             <Footer/>
         </React.Fragment>
     )
