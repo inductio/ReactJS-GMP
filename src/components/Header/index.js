@@ -9,12 +9,10 @@ import '../../styles/header.scss'
 const Header = (props) => {
     return (
         <header className="header">
+            <Logo/>
             {props.selectedMovie ?
+                <MovieDetails {...props}/> :
                 <>
-                    <MovieDetails {...props}/>
-                </>:
-                <>
-                    <Logo/>
                     <HeaderTitle title={'Find your movie'}/>
                     <AddMovie/>
                     <Search/>

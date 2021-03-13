@@ -1,5 +1,4 @@
 import React from 'react';
-import Logo from './../common/Logo';
 import '../../styles/movieDetails.scss';
 
 const MovieDetails = (props) => {
@@ -7,7 +6,6 @@ const MovieDetails = (props) => {
 
     return (
         <div className="movie-details">
-            <Logo/>
             <img
                 className="movie-details__img"
                 src={poster_path}
@@ -26,7 +24,7 @@ const MovieDetails = (props) => {
                 </div>
 
             </div>
-            <button className="movie-details__back" onClick={props.backToSearch}></button>
+            <button className="movie-details__back" onClick={props.backToSearch} title="Back to Search"/>
         </div>
     )
 };

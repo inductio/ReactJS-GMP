@@ -3,17 +3,13 @@ import Filter from './Filter';
 import Sort from './Sort';
 import MoviesGrid from './MoviesGrid';
 import MoviesCounter from './MoviesCounter';
+import {movies} from '../../data';
 import '../../styles/main.scss';
 import '../../styles/movies.scss';
 import '../../styles/menu.scss';
 
 class Main extends React.Component {
-    constructor (props) {
-        super(props);
-        this.state = {
-            movies: props.movies
-        }
-    }
+    state = {movies};
 
     render() {
         return (
@@ -24,7 +20,7 @@ class Main extends React.Component {
                 </div>
                 <div className="movies">
                     <MoviesCounter counter={this.state.movies.length} />
-                    <MoviesGrid movies={this.state.movies}/>
+                    <MoviesGrid movies={this.state.movies} onCardClick={this.props.onCardClick}/>
                 </div>
             </main>
         )
