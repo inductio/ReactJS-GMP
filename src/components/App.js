@@ -1,24 +1,23 @@
-import React, {useState} from 'react';
-import Header from './Header';
+import React, {useState, useEffect} from 'react';
+import '../styles/common.scss';
+import Header from "./Header";
 import Main from './Main';
 import Footer from './Footer';
-import '../styles/common.scss';
 
 const App = () => {
     const [selectedMovie, setMovie] = useState(null);
-    const handleMovieClick = (movie) => {
-        setMovie(movie);
+    useEffect(() => {
         window.scroll({
             top: 0,
             left: 0,
             behavior: 'smooth',
         });
-    };
+    }, [selectedMovie]);
 
     return (
         <React.Fragment>
             <Header selectedMovie={selectedMovie} backToSearch={() => setMovie(null)}/>
-            <Main onCardClick={handleMovieClick}/>
+            <Main onCardClick={movie => setMovie(movie)}/>
             <Footer/>
         </React.Fragment>
     )
