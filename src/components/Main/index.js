@@ -9,23 +9,18 @@ import '../../styles/movies.scss';
 import '../../styles/menu.scss';
 
 class Main extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            movies: movies
-        };
-    }
+    state = {movies};
 
     render() {
         return (
             <main className="main">
                 <div className="menu">
                     <Filter/>
-                    <Sort sort={() => this.setState({movies})} movies={this.state.movies}/>
+                    <Sort sort={movies => this.setState({movies})} movies={this.state.movies}/>
                 </div>
                 <div className="movies">
-                    <MoviesCounter counter={movies.length} />
-                    <MoviesGrid movies={this.state.movies}/>
+                    <MoviesCounter counter={this.state.movies.length} />
+                    <MoviesGrid movies={this.state.movies} onCardClick={this.props.onCardClick}/>
                 </div>
             </main>
         )

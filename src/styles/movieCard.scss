@@ -4,6 +4,7 @@
 	position: relative;
 	margin-right: 80px;
 	margin-bottom: 74px;
+	cursor: pointer;
 
 	&:nth-child(3n) {
 		margin-right: 0;
@@ -74,11 +75,7 @@
 			position: absolute;
 			top: -2px;
 			right: -2px;
-			display: none;
-
-			&.active {
-				display: block;
-			}
+			display: block;
 		}
 
 		&-popup-list {

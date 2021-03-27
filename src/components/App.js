@@ -1,20 +1,28 @@
-import React from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import '../styles/common.scss';
 import Header from "./Header";
 import Main from './Main';
 import Footer from './Footer';
-import Modal from './Modal';
 
-class App extends React.PureComponent {
-    render() {
-        return (
-            <React.Fragment>
-                <Header/>
-                <Main/>
-                <Footer/>
-            </React.Fragment>
-        )
-    }
-}
+const App = () => {
+    const [selectedMovie, setMovie] = useState(null);
+    const useSelectMovie = useCallback(movie => setMovie(movie), [selectedMovie]);
+
+    useEffect(() => {
+        window.scroll({
+            top: 0,
+            left: 0,
+            behavior: 'smooth',
+        });
+    }, [selectedMovie]);
+
+    return (
+        <React.Fragment>
+            <Header selectedMovie={selectedMovie} backToSearch={() => setMovie(null)}/>
+            <Main onCardClick={useSelectMovie}/>
+            <Footer/>
+        </React.Fragment>
+    )
+};
 
 export default App;
