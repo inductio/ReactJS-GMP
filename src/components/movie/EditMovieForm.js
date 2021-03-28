@@ -1,8 +1,15 @@
 import React from 'react';
 import Form from '../form/Form';
 import MovieFormFields from './MovieFormFields';
+import { editMovieRequest } from '../../actions';
+import { connect } from 'react-redux';
+import serializeFormData from '../utils/serializeFormData';
 
-const EditMovieForm = ({movie}) => {
+const EditMovieForm = (props) => {
+    if (!props.movie) {
+        return null;
+    }
+
     const editFormConfig = {
         buttons: [
             {
@@ -11,21 +18,33 @@ const EditMovieForm = ({movie}) => {
             },
             {
                 type: 'submit',
-                title: 'Save'
+                title: 'Save',
             }],
         formTitle: 'Edit Movie',
-        action: 'edit',
+        onSubmit: (e) => {
+            props.editMovieRequest(props.movie.id, serializeFormData(e.target));
+            e.preventDefault();
+            return false;
+            },
         descriptions: [
             {text: 'Movie Id', className: 'movie-form__id-title'},
-            {text: movie.id, className: 'movie-form__id-value'}
+            {text: props.movie.id, className: 'movie-form__id-value'}
         ]
     };
 
     return (
         <Form config={editFormConfig}>
-            <MovieFormFields movie={movie}/>
+            <MovieFormFields movie={props.movie}/>
         </Form>
     )
 };
 
-export default EditMovieForm;
+const mapState = (state) => {
+    return {
+        editMovieRequest: state.editMovieRequest,
+        movie: state.fetchMovies.movies.filter(movie => movie.id === state.showModal.modalMovieId)[0]
+    }
+};
+
+export default connect(mapState,{ editMovieRequest })(EditMovieForm);
+

@@ -1,8 +1,9 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import '../styles/common.scss';
-import Header from "./Header";
+import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
+import Modal from './Modal';
 
 const App = () => {
     const [selectedMovie, setMovie] = useState(null);
@@ -21,6 +22,7 @@ const App = () => {
             <Header selectedMovie={selectedMovie} backToSearch={() => setMovie(null)}/>
             <Main onCardClick={useSelectMovie}/>
             <Footer/>
+            <Modal/>
         </React.Fragment>
     )
 };

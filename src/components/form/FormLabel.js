@@ -1,9 +1,9 @@
 import React from 'react';
 
-const FormLabel = ({label, index}) => (
+const FormLabel = ({id, label}) => (
     <label
         className="movie-form__label"
-        htmlFor={`movie-form-id-${index}`}
+        htmlFor={id}
     >
         {label}
     </label>

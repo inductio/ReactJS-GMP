@@ -1,8 +1,11 @@
 import React from 'react';
 import Form from '../form/Form';
 import MovieFormFields from './MovieFormFields';
+import { addMovieRequest } from '../../actions';
+import { connect } from 'react-redux';
+import serializeFormData from '../utils/serializeFormData';
 
-const AddMovieForm = () => {
+const AddMovieForm = (props) => {
     const movieFields = {
             title: '',
             release_date: new Date().toLocaleDateString(),
@@ -31,7 +34,11 @@ const AddMovieForm = () => {
                 title: 'Submit'
             }],
         formTitle: 'Add Movie',
-        action: 'add',
+        onSubmit: (e) => {
+            props.addMovieRequest(serializeFormData(e.target));
+            e.preventDefault();
+            return false;
+        },
         descriptions: []
     };
 
@@ -42,4 +49,11 @@ const AddMovieForm = () => {
     )
 };
 
-export default AddMovieForm;
+const mapState = (state) => {
+    return {
+        addMovieRequest: state.addMovieRequest
+    }
+};
+
+export default connect(mapState, { addMovieRequest })(AddMovieForm);
+

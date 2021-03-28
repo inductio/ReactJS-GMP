@@ -8,18 +8,15 @@ const FormFields = ({fields}) => {
         <React.Fragment key={index}>
             <FormLabel
                 key={`label-${index}`}
-                index={index}
                 label={field.label}
             />
             {field.inputType === 'select' ?
                 <FormSelect
                     key={`select-${index}`}
-                    index={index}
                     field={field}
                 /> :
                 <FormInput
                     key={`input-${index}`}
-                    index={index}
                     field={field}
                 />
             }

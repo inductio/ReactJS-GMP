@@ -1,11 +1,11 @@
 import React from 'react';
 
-const FormInput = ({field, index}) => {
-    const {placeholder, defaultValue, inputType} = field;
+const FormInput = ({field}) => {
+    const {id, placeholder, defaultValue, inputType} = field;
     return (
         <input
+            id={id}
             type={inputType}
-            id={`movie-form-id-${index}`}
             defaultValue={defaultValue}
             placeholder={placeholder}
             className="movie-form__input"

@@ -1,20 +1,22 @@
 import React from 'react';
 
-const FormSelect = ({field, index}) => {
-    const {label, placeholder, defaultValue} = field;
+const FormSelect = ({field}) => {
+    const {id, label, placeholder, defaultValue} = field;
     return (
         <select
+            id={id}
             name={label}
-            id={`movie-form-id-${index}`}
             className="movie-form__input"
             defaultValue={placeholder}
         >
             <option defaultValue={placeholder} disabled>{placeholder}</option>
-            {defaultValue.map((option, optionIndex) => (
+            {typeof defaultValue === 'Object' ? defaultValue.map((option, optionIndex) => (
                 <option key={optionIndex} value={option}>
                     {option}
                 </option>
-            ))}
+            )) : <option value={defaultValue}>
+                    {defaultValue}
+                </option>}
         </select>
     )
 };
