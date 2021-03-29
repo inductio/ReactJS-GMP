@@ -10,7 +10,7 @@ const FormSelect = ({field}) => {
             defaultValue={placeholder}
         >
             <option defaultValue={placeholder} disabled>{placeholder}</option>
-            {typeof defaultValue === 'Object' ? defaultValue.map((option, optionIndex) => (
+            {Array.isArray(defaultValue) ? defaultValue.map((option, optionIndex) => (
                 <option key={optionIndex} value={option}>
                     {option}
                 </option>

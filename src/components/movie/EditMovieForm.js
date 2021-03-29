@@ -42,7 +42,7 @@ const EditMovieForm = (props) => {
 const mapState = (state) => {
     return {
         editMovieRequest: state.editMovieRequest,
-        movie: state.fetchMovies.movies.filter(movie => movie.id === state.showModal.modalMovieId)[0]
+        movie: state.movies.filter(movie => movie.id === state.showModal.modalMovieId)[0]
     }
 };
 
