@@ -25,13 +25,12 @@ class Main extends React.Component {
                 </div>
                 <div className="movies">
                     <MoviesCounter counter={this.props.movies.length} />
-                    <MoviesGrid movies={this.props.movies} onCardClick={this.props.onCardClick}/>
+                    <MoviesGrid movies={this.props.movies}/>
                 </div>
             </main>
         )
     }
 }
-
 
 const mapState = (state) => {
     return {

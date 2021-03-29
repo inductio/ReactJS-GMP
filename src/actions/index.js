@@ -23,3 +23,7 @@ export const deleteMovieRequest = id => async dispatch => {
 export const showModal = (modalType, modalMovieId) => {
     return {type: 'SHOW_MODAL', payload: {modalType, modalMovieId}}
 };
+
+export const showMovieDetails = (movieDetails) => {
+    return {type: 'SHOW_MOVIE_DETAILS', payload: {movieDetails}}
+};

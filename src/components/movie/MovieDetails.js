@@ -1,8 +1,8 @@
 import React from 'react';
 import '../../styles/movieDetails.scss';
 
-const MovieDetails = (props) => {
-    const {title, tagline, overview, runtime, vote_average, release_date, poster_path} = props.selectedMovie;
+const MovieDetails = ({selectedMovie}) => {
+    const {title, tagline, overview, runtime, vote_average, release_date, poster_path} = selectedMovie;
 
     return (
         <div className="movie-details">
@@ -24,7 +24,7 @@ const MovieDetails = (props) => {
                 </div>
 
             </div>
-            <button className="movie-details__back" onClick={props.backToSearch} title="Back to Search"/>
+            <button className="movie-details__back" onClick={() => false} title="Back to Search"/>
         </div>
     )
 };

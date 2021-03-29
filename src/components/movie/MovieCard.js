@@ -2,11 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MovieCardMenu from './MovieCardMenu';
 import '../../styles/movieCard.scss';
+import { showMovieDetails } from '../../actions';
+import { connect } from 'react-redux';
 
 const MovieCard = (props) => {
     const {title, release_date, genres, poster_path} = props.movie;
     return (
-        <div className="movie-card" onClick={() => props.onCardClick(props.movie)}>
+        <div className="movie-card" onClick={() => props.showMovieDetails(props.movie)}>
             <img
                 className="movie-card__img"
                 src={poster_path}
@@ -26,4 +28,10 @@ MovieCard.propTypes = {
     movie: PropTypes.object
 };
 
-export default MovieCard;
+const mapState = (state) => {
+    return {
+        showMovieDetails: state.showMovieDetails,
+    }
+};
+
+export default connect(mapState, { showMovieDetails })(MovieCard);
