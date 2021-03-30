@@ -9,7 +9,6 @@ const MoviesGrid = ({movies}) => (
 );
 
 const mapState = (state) => {
-    console.log('MoviesGrid', state);
     return {
         movies: state.movies || []
     }
