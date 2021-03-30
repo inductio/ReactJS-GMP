@@ -1,8 +1,7 @@
-import React, { useRef } from 'react';
+import React  from 'react';
 import '../../styles/movieForm.scss';
 
 const Form = ({config, children}) => {
-
     return (
         <div className="movie-form">
             <h3 className="movie-form__header">

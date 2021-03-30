@@ -46,5 +46,4 @@ const mapState = (state) => {
     }
 };
 
-export default connect(mapState,{ editMovieRequest })(EditMovieForm);
-
+export default connect(mapState, { editMovieRequest })(EditMovieForm);

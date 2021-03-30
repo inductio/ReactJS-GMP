@@ -6,7 +6,7 @@ const sortOptions = ['Release Date', 'Rating', 'Runtime', 'Genre'];
 
 const Sort = (props) => {
     const onSort = (e) => {
-        props.sortMovies(e.target.value, props.movies);
+        props.sortMovies(e.target.value, [...props.movies]);
     };
 
     return (
@@ -23,9 +23,8 @@ const Sort = (props) => {
 
 const mapState = (state) => {
     return {
-        movies: state.movies || []
+        movies: state.movies
     }
 };
 
 export default connect(mapState, {sortMovies})(Sort)
-

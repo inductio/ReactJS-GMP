@@ -16,7 +16,7 @@ const MovieCard = (props) => {
             />
             <div className="movie-card__info">
                 <div className="movie-card__title">{title}</div>
-                <div className="movie-card__category">{genres[0]}</div>
+                <div className="movie-card__category">{genres.join(', ')}</div>
                 <div className="movie-card__year">{parseInt(release_date)}</div>
             </div>
             <MovieCardMenu {...props}/>
@@ -30,7 +30,7 @@ MovieCard.propTypes = {
 
 const mapState = (state) => {
     return {
-        showMovieDetails: state.showMovieDetails,
+        movieDetails: state.movieDetails,
     }
 };
 

@@ -1,18 +1,34 @@
 import React from 'react';
 import MovieCard from '../movie/MovieCard';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
+import { fetchMovies } from '../../actions';
 
-const MoviesGrid = ({movies}) => (
-    <div className="movies__grid">
-        {movies.length ? movies.map((movie) => <MovieCard key={movie.id} movie={movie} />) : null}
-    </div>
-);
+const MoviesGrid = (props) => {
+    if (!props.movies.length) {
+        props.fetchMovies();
+        return null;
+    }
+
+    const movies = props.activeMovies && props.activeMovies.length ? props.activeMovies : props.movies;
+    return (
+        <div className="movies__grid">
+            {movies.map((movie) => <MovieCard key={movie.id} movie={movie}/>)}
+        </div>
+    )
+
+};
 
 const mapState = (state) => {
     return {
-        movies: state.movies || []
+        movies: state.movies || [],
+        activeMovies: state.activeMovies,
     }
 };
 
-export default connect(mapState)(MoviesGrid)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchMovies: () => dispatch(fetchMovies())
+    }
+};
 
+export default connect(mapState, mapDispatchToProps)(MoviesGrid)

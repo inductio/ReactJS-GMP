@@ -11,8 +11,8 @@ const Header = (props) => {
     return (
         <header className="header">
             <Logo/>
-            {props.selectedMovie ?
-                <MovieDetails selectedMovie={props.selectedMovie}/> :
+            {props.movieDetails ?
+                <MovieDetails selectedMovie={props.movieDetails}/> :
                 <>
                     <HeaderTitle title={'Find your movie'}/>
                     <AddMovie/>
@@ -25,7 +25,7 @@ const Header = (props) => {
 
 const mapState = (state) => {
     return {
-        selectedMovie: state.showMovieDetails.movieDetails
+        movieDetails: state.movieDetails
     }
 };
 

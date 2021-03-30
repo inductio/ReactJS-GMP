@@ -1,6 +1,6 @@
 export default (state = [], action) => {
     switch (action.type) {
-        case  'DELETE_MOVIE_REQUEST':
+        case  'SET_ACTIVE_MOVIES':
             return [...action.payload];
         default:
             return state;
