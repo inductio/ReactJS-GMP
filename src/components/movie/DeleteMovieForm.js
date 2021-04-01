@@ -23,9 +23,14 @@ const DeleteMovieForm = (props) => {
 
 const mapState = (state) => {
     return {
-        deleteMovieRequest: state.deleteMovieRequest,
-        movieId: state.showModal.modalMovieId
+        movieId: state.modal.modalMovieId
     }
 };
 
-export default connect(mapState, { deleteMovieRequest })(DeleteMovieForm);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        deleteMovieRequest: (movieId) => dispatch(deleteMovieRequest(movieId))
+    }
+};
+
+export default connect(mapState, mapDispatchToProps)(DeleteMovieForm);

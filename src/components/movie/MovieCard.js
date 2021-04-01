@@ -16,7 +16,7 @@ const MovieCard = (props) => {
             />
             <div className="movie-card__info">
                 <div className="movie-card__title">{title}</div>
-                <div className="movie-card__category">{genres.join(', ')}</div>
+                <div className="movie-card__category">{genres}</div>
                 <div className="movie-card__year">{parseInt(release_date)}</div>
             </div>
             <MovieCardMenu {...props}/>
@@ -34,4 +34,10 @@ const mapState = (state) => {
     }
 };
 
-export default connect(mapState, { showMovieDetails })(MovieCard);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        showMovieDetails: (movie) => dispatch(showMovieDetails(movie))
+    }
+};
+
+export default connect(mapState, mapDispatchToProps)(MovieCard);

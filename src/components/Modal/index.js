@@ -10,7 +10,7 @@ const Modal = (props) => (
     props.modalType ?
         <div className="modal">
             <div className="modal__container">
-                <button className="modal__close-btn" onClick={() => props.showModal(null, null)}/>
+                <button className="modal__close-btn" onClick={() => props.closeModal()}/>
                 <div className="modal__content">
                     {props.modalType === 'ADD_MOVIE_TYPE' && <AddMovieForm/>}
                     {props.modalType === 'EDIT_MOVIE_TYPE' && <EditMovieForm/>}
@@ -22,8 +22,14 @@ const Modal = (props) => (
 
 function mapStateToProps(state) {
     return {
-        modalType: state.showModal.modalType
+        modalType: state.modal.modalType
     }
 }
 
-export default connect(mapStateToProps, {showModal})(Modal);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        closeModal: () => dispatch(showModal(null, null))
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Modal);

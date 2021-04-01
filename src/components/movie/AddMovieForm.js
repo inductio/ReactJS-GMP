@@ -49,10 +49,10 @@ const AddMovieForm = (props) => {
     )
 };
 
-const mapState = (state) => {
+const mapDispatchToProps = (dispatch) => {
     return {
-        addMovieRequest: state.addMovieRequest
+        addMovieRequest: (formData) => dispatch(addMovieRequest(formData))
     }
 };
 
-export default connect(mapState, { addMovieRequest })(AddMovieForm);
+export default connect(null, mapDispatchToProps)(AddMovieForm);

@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import MovieCard from '../movie/MovieCard';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { fetchMovies } from '../../actions';
 
 const MoviesGrid = (props) => {
-    if (!props.movies.length) {
+    useEffect(() => {
         props.fetchMovies();
+        }, []);
+
+    if (!props.movies.length) {
         return null;
     }
 

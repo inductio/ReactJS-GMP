@@ -1,8 +1,12 @@
 import React, {useState} from 'react';
 import MovieCardMenuItem from './MovieCardMenuItem';
-const menu = [{type: 'EDIT_MOVIE_TYPE', name: 'Edit'}, {type: 'DELETE_MOVIE_TYPE', name: 'Delete'}];
 import { connect } from 'react-redux';
 import { showModal } from '../../actions';
+
+const menu = [
+    {type: 'EDIT_MOVIE_TYPE', name: 'Edit'},
+    {type: 'DELETE_MOVIE_TYPE', name: 'Delete'}
+];
 
 const MovieCardMenu = (props) => {
     const [isMenuVisible, setMenuVisibility] = useState(false);
@@ -28,10 +32,13 @@ const MovieCardMenu = (props) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-    return { showModal: state.showModal, ...ownProps}
+    return ownProps
 };
 
-export default connect(mapStateToProps, {
-    showModal
-})(MovieCardMenu);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        showModal: (modalType, movieId) => dispatch(showModal(modalType, movieId))
+    }
+};
 
+export default connect(mapStateToProps, mapDispatchToProps)(MovieCardMenu);

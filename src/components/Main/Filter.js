@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../../styles/filter.scss';
-import {connect} from 'react-redux';
-import {setFilter, filterMovies} from '../../actions';
+import { connect } from 'react-redux';
+import { setFilter, filterMovies } from '../../actions';
 
 const Filter = (props) => {
     const regularClassName = 'filter-bar__item';
     const activeClassName = `${regularClassName} active`;
 
-    if (props.filter.length) {
-        props.filterMovies([...props.movies], props.filter);
-    }
+    useEffect(() => {
+        props.filterMovies(props.movies, props.filter);
+    }, [props.filter]);
 
     return (
         <ul className="filter-bar">
@@ -38,8 +38,11 @@ const mapState = (state) => {
     }
 };
 
-export default connect(mapState, {
-    setFilter,
-    filterMovies,
-})(Filter);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setFilter: (genre) => dispatch(setFilter(genre)),
+        filterMovies: (movies, filter) => dispatch(filterMovies(movies, filter))
+    }
+};
 
+export default connect(mapState, mapDispatchToProps)(Filter);

@@ -6,7 +6,7 @@ const sortOptions = ['Release Date', 'Rating', 'Runtime', 'Genre'];
 
 const Sort = (props) => {
     const onSort = (e) => {
-        props.sortMovies(e.target.value, [...props.movies]);
+        props.sortMovies(e.target.value, props.movies);
     };
 
     return (
@@ -27,4 +27,10 @@ const mapState = (state) => {
     }
 };
 
-export default connect(mapState, {sortMovies})(Sort)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        sortMovies: (sortType, movies) => dispatch(sortMovies(sortType, movies))
+    }
+};
+
+export default connect(mapState, mapDispatchToProps)(Sort)

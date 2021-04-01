@@ -11,18 +11,15 @@ export const fetchMovies = () => async dispatch => {
 };
 
 export const addMovieRequest = data => async dispatch => {
-    const response = await jsonPlaceholder.post(`/`, data);
-    dispatch({type: 'ADD_MOVIE_REQUEST', payload: response.data})
+    await jsonPlaceholder.post(`/`, data);
 };
 
 export const editMovieRequest = (id, data) => async dispatch => {
-    const response = await jsonPlaceholder.patch(`/${id}`, data);
-    dispatch({type: 'EDIT_MOVIE_REQUEST', payload: response.data})
+    await jsonPlaceholder.patch(`/${id}`, data);
 };
 
 export const deleteMovieRequest = id => async dispatch => {
-    const response = await jsonPlaceholder.delete(`/${id}`);
-    dispatch({type: 'DELETE_MOVIE_REQUEST', payload: response.data})
+    await jsonPlaceholder.delete(`/${id}`);
 };
 
 export const showModal = (modalType, modalMovieId) => {

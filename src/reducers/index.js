@@ -1,20 +1,16 @@
 import { combineReducers } from 'redux';
-import setMovies from './setMovies';
-import setActiveMovies from './setActiveMovies';
-import addMovieRequest from './addMovieRequest';
-import editMovieRequest from './editMovieRequest';
-import showModal from './showModal';
+import movies from './movies';
+import activeMovies from './activeMovies';
+import modal from './modal';
 import movieDetails from './movieDetails';
-import setGenres from './setGenres';
-import setFilter from './setFilter';
+import genres from './genres';
+import filter from './filter';
 
 export default combineReducers({
-    movies: setMovies,
-    activeMovies: setActiveMovies,
-    genres: setGenres,
-    filter: setFilter,
-    addMovieRequest,
-    editMovieRequest,
-    showModal,
+    movies,
+    activeMovies,
+    genres,
+    filter,
+    modal,
     movieDetails
 });

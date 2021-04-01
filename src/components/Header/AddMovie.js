@@ -15,10 +15,10 @@ const AddMovie = (props) => {
     )
 };
 
-const mapStateToProps = (state) => {
-    return { showModal: state.showModal}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        showModal: (modalType) => dispatch(showModal(modalType))
+    }
 };
 
-export default connect(mapStateToProps, {
-    showModal
-})(AddMovie);
+export default connect(null, mapDispatchToProps)(AddMovie);
