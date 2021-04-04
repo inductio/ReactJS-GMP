@@ -1,29 +1,16 @@
 import React, {useState} from 'react';
-import Modal from '../Modal';
-import EditMovieForm from './EditMovieForm';
-import DeleteMovieForm from './DeleteMovieForm';
 import MovieCardMenuItem from './MovieCardMenuItem';
-const menu = ['Edit', 'Delete'];
+import { connect } from 'react-redux';
+import { showModal } from '../../actions';
+
+const menu = [
+    {type: 'EDIT_MOVIE_TYPE', name: 'Edit'},
+    {type: 'DELETE_MOVIE_TYPE', name: 'Delete'}
+];
 
 const MovieCardMenu = (props) => {
-    const [isModalVisible, setModalVisibility] = useState(false);
     const [isMenuVisible, setMenuVisibility] = useState(false);
-    const [formType, setFormType] = useState('');
-
-    const useToggleModal = () => setModalVisibility(!isModalVisible);
     const useToggleMenu = () => setMenuVisibility(!isMenuVisible);
-
-    const useShowModal = (formType) => {
-        setFormType(formType);
-        useToggleModal();
-    };
-
-    const getForm = () => {
-        const typesMap = {};
-        typesMap['Edit'] = <EditMovieForm {...props}/>;
-        typesMap['Delete'] = <DeleteMovieForm {...props}/>;
-        return typesMap[formType];
-    };
 
     return (
         <div className="movie-card__menu">
@@ -31,18 +18,27 @@ const MovieCardMenu = (props) => {
             {isMenuVisible && (
                 <div className="movie-card__menu-popup">
                     <ul className="movie-card__menu-popup-list">
-                        {menu.map(item => <MovieCardMenuItem key={item} onClick={() => useShowModal(item)} title={item}/>)}
+                        {menu.map(item => <MovieCardMenuItem
+                            key={item.name}
+                            onClick={() => props.showModal(item.type, props.movie.id)}
+                            title={item.name}/>)
+                        }
                     </ul>
                     <button className="movie-card__menu-close-btn" onClick={useToggleMenu}/>
                 </div>
-            )}
-            {isModalVisible && (
-                <Modal onModalClose={useToggleModal}>
-                    {getForm()}
-                </Modal>
             )}
         </div>
     )
 };
 
-export default MovieCardMenu;
+const mapStateToProps = (state, ownProps) => {
+    return ownProps
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        showModal: (modalType, movieId) => dispatch(showModal(modalType, movieId))
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieCardMenu);

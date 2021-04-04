@@ -1,5 +1,7 @@
 import React from 'react';
 import '../../styles/movieDetails.scss';
+import { connect } from 'react-redux';
+import { showMovieDetails } from '../../actions';
 
 const MovieDetails = (props) => {
     const {title, tagline, overview, runtime, vote_average, release_date, poster_path} = props.selectedMovie;
@@ -24,9 +26,15 @@ const MovieDetails = (props) => {
                 </div>
 
             </div>
-            <button className="movie-details__back" onClick={props.backToSearch} title="Back to Search"/>
+            <button className="movie-details__back" onClick={() => props.hideMovieDetails()} title="Back to Search"/>
         </div>
     )
 };
 
-export default MovieDetails;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        hideMovieDetails: () => dispatch(showMovieDetails(null))
+    }
+};
+
+export default connect(null, mapDispatchToProps)(MovieDetails);

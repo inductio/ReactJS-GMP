@@ -1,25 +1,24 @@
-import React, {useState} from 'react';
-import Modal from '../Modal';
-import AddMovieForm from '../movie/AddMovieForm';
+import React from 'react';
+import { connect } from 'react-redux';
+import { showModal } from '../../actions';
 
-const AddMovie = () => {
-    const [isModalVisible, setModalVisibility] = useState(false);
-    const useToggleModal = () => setModalVisibility(!isModalVisible);
+const AddMovie = (props) => {
     return (
         <>
             <button
                 className="header__add-movie"
-                onClick={useToggleModal}
+                onClick={() => props.showModal('ADD_MOVIE_TYPE')}
             >
                 Add movie
             </button>
-            {isModalVisible &&
-                <Modal onModalClose={useToggleModal}>
-                    <AddMovieForm/>
-                </Modal>
-            }
         </>
     )
 };
 
-export default AddMovie;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        showModal: (modalType) => dispatch(showModal(modalType))
+    }
+};
+
+export default connect(null, mapDispatchToProps)(AddMovie);

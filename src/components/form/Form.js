@@ -1,4 +1,4 @@
-import React from 'react';
+import React  from 'react';
 import '../../styles/movieForm.scss';
 
 const Form = ({config, children}) => {
@@ -7,7 +7,7 @@ const Form = ({config, children}) => {
             <h3 className="movie-form__header">
                 {config.formTitle}
             </h3>
-            <form action={config.action} className="movie-form__form">
+            <form className="movie-form__form" onSubmit={config.onSubmit}>
                 {config.descriptions.map((description, index) => (
                     <p key={index} className={description.className}>
                         {description.text}

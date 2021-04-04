@@ -1,23 +1,12 @@
-import React, {useEffect} from 'react';
-import {byDate, byRating, byRuntime} from './../utils/sortUtils';
+import React from 'react';
 import '../../styles/sort.scss';
+import { connect } from 'react-redux';
+import { sortMovies } from '../../actions';
+const sortOptions = ['Release Date', 'Rating', 'Runtime', 'Genre'];
 
-const sortOptions = ['Release Date', 'Rating', 'Runtime'];
-
-const Sort = ({movies, sort}) => {
-    useEffect(() => {
-        //Default Sorting
-        sort(movies.sort(byDate));
-    }, []);
-
+const Sort = (props) => {
     const onSort = (e) => {
-        const value = e.target.value;
-        const sortMapStrategy = new Map([
-            ['Release Date', () => movies.sort(byDate)],
-            ['Rating', () => movies.sort(byRating)],
-            ['Runtime', () => movies.sort(byRuntime)]
-        ]);
-        sort(sortMapStrategy.get(value)());
+        props.sortMovies(e.target.value, props.movies);
     };
 
     return (
@@ -32,4 +21,16 @@ const Sort = ({movies, sort}) => {
     )
 };
 
-export default Sort;
+const mapState = (state) => {
+    return {
+        movies: state.movies
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        sortMovies: (sortType, movies) => dispatch(sortMovies(sortType, movies))
+    }
+};
+
+export default connect(mapState, mapDispatchToProps)(Sort)
