@@ -1,8 +1,8 @@
 import React from 'react';
 import '../../styles/modal.scss';
 import { connect } from 'react-redux';
-import AddMovieForm from '../movie/AddMovieForm';
-import EditMovieForm from '../movie/EditMovieForm';
+import AddMovieFormik from '../movie/AddMovieFormik';
+import EditMovieFormik from '../movie/EditMovieFormik';
 import DeleteMovieForm from '../movie/DeleteMovieForm';
 import { showModal } from '../../actions';
 
@@ -12,8 +12,8 @@ const Modal = (props) => (
             <div className="modal__container">
                 <button className="modal__close-btn" onClick={() => props.closeModal()}/>
                 <div className="modal__content">
-                    {props.modalType === 'ADD_MOVIE_TYPE' && <AddMovieForm/>}
-                    {props.modalType === 'EDIT_MOVIE_TYPE' && <EditMovieForm/>}
+                    {props.modalType === 'ADD_MOVIE_TYPE' && <AddMovieFormik/>}
+                    {props.modalType === 'EDIT_MOVIE_TYPE' && <EditMovieFormik/>}
                     {props.modalType === 'DELETE_MOVIE_TYPE' && <DeleteMovieForm/>}
                 </div>
             </div>

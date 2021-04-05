@@ -1,25 +1,27 @@
-import jsonPlaceholder from '../apis/jsonPlaceholder';
+import apiUrl from '../apis/apiUrl';
+import _ from 'lodash';
 import { byDate, byRating, byRuntime, byGenre } from './../components/utils/sortUtils';
 import { getFilterValues, getFilteredMovies } from './../components/utils/filterUtils';
 
 export const fetchMovies = () => async dispatch => {
-    const response = await jsonPlaceholder.get('/');
-    const movies = response.data;
+    const response = await apiUrl.get('/');
+    const movies = response.data.data;
     const genres = getFilterValues([...movies]);
     dispatch({type: 'SET_MOVIES', payload: movies});
     dispatch({type: 'SET_GENRES', payload: genres});
 };
 
 export const addMovieRequest = data => async dispatch => {
-    await jsonPlaceholder.post(`/`, data);
+    await apiUrl.post('/', data);
 };
 
 export const editMovieRequest = (id, data) => async dispatch => {
-    await jsonPlaceholder.patch(`/${id}`, data);
+    data = _.extend(data, {id});
+    await apiUrl.put('/', data);
 };
 
 export const deleteMovieRequest = id => async dispatch => {
-    await jsonPlaceholder.delete(`/${id}`);
+    await apiUrl.delete(`/${id}`);
 };
 
 export const showModal = (modalType, modalMovieId) => {
