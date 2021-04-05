@@ -59,10 +59,13 @@ const AddMovieFormik = (props) => {
                             />
 
                             <label htmlFor="movieDate" className="movie-form__label">Release date</label>
-                            <Field id="movieDate" name="release_date" type="date" placeholder="Select Date" className="movie-form__input"/>
+                            <Field id="movieDate" name="release_date" type="date" placeholder="Select Date"
+                            />
 
                             <label htmlFor="movieUrl" className="movie-form__label">Movie URL</label>
-                            <Field id="movieUrl" name="poster_path" type="text" placeholder="Add Movie\'s Name Here" className="movie-form__input"/>
+                            <Field id="movieUrl" name="poster_path" type="text" placeholder="Add Movie\'s Name Here"
+                                   className={errors.poster_path && touched.poster_path ? "movie-form__input error" : "movie-form__input"}
+                            />
 
                             <div id="checkbox-group">Select Genre</div>
 
@@ -78,10 +81,14 @@ const AddMovieFormik = (props) => {
                             </div>
 
                             <label htmlFor="movieOverview" className="movie-form__label">Overview</label>
-                            <Field id="movieOverview" name="overview" type="text" placeholder="Overview here" className="movie-form__input"/>
+                            <Field id="movieOverview" name="overview" type="text" placeholder="Overview here"
+                                   className={errors.overview && touched.overview ? "movie-form__input error" : "movie-form__input"}
+                            />
 
                             <label htmlFor="movieRuntime" className="movie-form__label">Runtime</label>
-                            <Field id="movieRuntime" name="runtime" type="number" placeholder="Runtime here" className="movie-form__input"/>
+                            <Field id="movieRuntime" name="runtime" type="number" placeholder="Runtime here"
+                                   className={errors.runtime && touched.runtime ? "movie-form__input error" : "movie-form__input"}
+                            />
 
                             <div className="movie-form__buttons">
                                 {addFormConfig.buttons.map(button => (
