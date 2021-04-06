@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import { addMovieRequest } from '../../actions';
+import TextFieldFormik from './TextFieldFormik';
 import { connect } from 'react-redux';
 import * as Yup from 'yup';
 
@@ -53,22 +54,11 @@ const AddMovieFormik = (props) => {
                     } = props;
                     return (
                         <Form className="movie-form__form">
-                            <label htmlFor="movieTitle" className="movie-form__label">Title</label>
-                            <Field id="movieTitle" name="title" type="text" placeholder="Add Movie\'s Name Here"
-                                   className={errors.title && touched.title ? "movie-form__input error" : "movie-form__input"}
-                            />
-
-                            <label htmlFor="movieDate" className="movie-form__label">Release date</label>
-                            <Field id="movieDate" name="release_date" type="date" placeholder="Select Date"
-                            />
-
-                            <label htmlFor="movieUrl" className="movie-form__label">Movie URL</label>
-                            <Field id="movieUrl" name="poster_path" type="text" placeholder="Add Movie\'s Name Here"
-                                   className={errors.poster_path && touched.poster_path ? "movie-form__input error" : "movie-form__input"}
-                            />
+                            <TextFieldFormik id="movieTitle" name="title" type="text" placeholder="Add Movie\'s Name Here" label="Title"/>
+                            <TextFieldFormik id="movieDate" name="release_date" type="date" placeholder="Select Date" label="Release date"/>
+                            <TextFieldFormik id="movieUrl" name="poster_path" type="text" placeholder="Add Movie\'s Url Here" label="Movie URL"/>
 
                             <div id="checkbox-group">Select Genre</div>
-
                             <div role="group" aria-labelledby="checkbox-group">
                                 {values.genres.map((genre, idx) =>
                                     (
@@ -80,15 +70,8 @@ const AddMovieFormik = (props) => {
                                 )}
                             </div>
 
-                            <label htmlFor="movieOverview" className="movie-form__label">Overview</label>
-                            <Field id="movieOverview" name="overview" type="text" placeholder="Overview here"
-                                   className={errors.overview && touched.overview ? "movie-form__input error" : "movie-form__input"}
-                            />
-
-                            <label htmlFor="movieRuntime" className="movie-form__label">Runtime</label>
-                            <Field id="movieRuntime" name="runtime" type="number" placeholder="Runtime here"
-                                   className={errors.runtime && touched.runtime ? "movie-form__input error" : "movie-form__input"}
-                            />
+                            <TextFieldFormik id="movieOverview" name="overview" type="text" placeholder="Overview here" label="Overview"/>
+                            <TextFieldFormik id="movieRuntime" name="runtime" type="number" placeholder="Runtime here" label="Runtime"/>
 
                             <div className="movie-form__buttons">
                                 {addFormConfig.buttons.map(button => (
