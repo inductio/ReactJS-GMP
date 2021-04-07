@@ -14,6 +14,7 @@ export const fetchMovies = () => async dispatch => {
 export const addMovieRequest = data => async dispatch => {
     const response = await apiUrl.post('/', data);
     dispatch({type: 'UPDATE_WITH_NEW_MOVIE', payload: response.data});
+    dispatch(showModal(null, null))
 };
 
 export const editMovieRequest = (id, data) => async (dispatch) => {
@@ -21,6 +22,7 @@ export const editMovieRequest = (id, data) => async (dispatch) => {
     await apiUrl.put('/', data);
     dispatch({type: 'SET_FILTER', payload: {type: null, movies: []}});
     dispatch({type: 'UPDATE_MOVIES', payload: data});
+    dispatch(showModal(null, null))
 };
 
 export const deleteMovieRequest = id => async dispatch => {
