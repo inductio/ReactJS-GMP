@@ -52,8 +52,6 @@ const EditMovieFormik = (props) => {
                 {(props) => {
                     const {
                         values,
-                        touched,
-                        errors
                     } = props;
                     return (
                         <Form className="movie-form__form">
@@ -104,7 +102,7 @@ const EditMovieFormik = (props) => {
 
 const mapState = (state) => {
     return {
-        movie: state.movies.filter(movie => movie.id === state.modal.modalMovieId)[0]
+        movie: [...state.movies].filter(movie => movie.id === state.modal.modalMovieId)[0]
     }
 };
 

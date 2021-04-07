@@ -12,12 +12,15 @@ export const fetchMovies = () => async dispatch => {
 };
 
 export const addMovieRequest = data => async dispatch => {
-    await apiUrl.post('/', data);
+    const response = await apiUrl.post('/', data);
+    dispatch({type: 'UPDATE_WITH_NEW_MOVIE', payload: response.data});
 };
 
-export const editMovieRequest = (id, data) => async dispatch => {
+export const editMovieRequest = (id, data) => async (dispatch) => {
     data = _.extend(data, {id});
     await apiUrl.put('/', data);
+    dispatch({type: 'SET_FILTER', payload: {type: null, movies: []}});
+    dispatch({type: 'UPDATE_MOVIES', payload: data});
 };
 
 export const deleteMovieRequest = id => async dispatch => {
@@ -32,7 +35,7 @@ export const showMovieDetails = (movieDetails) => {
     return {type: 'SHOW_MOVIE_DETAILS', payload: movieDetails}
 };
 
-export const sortMovies = (type, movies) => {
+export const sortMovies = (type, movies) => dispatch => {
     const sortMovies = [...movies];
     const sortMapStrategy = new Map([
         ['Release Date', () => sortMovies.sort(byDate)],
@@ -41,18 +44,12 @@ export const sortMovies = (type, movies) => {
         ['Genre', () => sortMovies.sort(byGenre)]
     ]);
 
-    return {type: 'SET_ACTIVE_MOVIES', payload: sortMapStrategy.get(type)()}
+    dispatch({type: 'SET_FILTER', payload: {type: null, movies: []}});
+    dispatch({type: 'SET_MOVIES', payload: sortMapStrategy.get(type)()});
 };
 
-export const setFilter = filter => {
-    return {type: 'SET_FILTER', payload: filter};
-};
-
-export const filterMovies = (movies, filter) => {
-    if (!filter) {
-        return {type: 'SET_ACTIVE_MOVIES', payload: movies};
-    }
-
+export const setFilter = (filter, movies) => {
     const filteredMovies = getFilteredMovies([...movies], filter);
-    return {type: 'SET_ACTIVE_MOVIES', payload: [...filteredMovies]};
+
+    return {type: 'SET_FILTER', payload: {type: filter, movies: filteredMovies}};
 };

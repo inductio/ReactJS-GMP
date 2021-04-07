@@ -2,20 +2,25 @@ import React, { useEffect } from 'react';
 import MovieCard from '../movie/MovieCard';
 import { connect } from 'react-redux';
 import { fetchMovies } from '../../actions';
+import { showMovieDetails } from '../../actions';
 
 const MoviesGrid = (props) => {
+    const {movies, fetchMovies, showMovieDetails} = props;
     useEffect(() => {
-        props.fetchMovies();
+        fetchMovies();
         }, []);
 
-    if (!props.movies.length) {
+    if (!movies.length) {
         return null;
     }
 
-    const movies = props.activeMovies && props.activeMovies.length ? props.activeMovies : props.movies;
     return (
         <div className="movies__grid">
-            {movies.map((movie) => <MovieCard key={movie.id} movie={movie}/>)}
+            {[...movies].map((movie) => <MovieCard
+                key={movie.id}
+                movie={movie}
+                showMovieDetails={showMovieDetails}
+            />)}
         </div>
     )
 
@@ -23,14 +28,14 @@ const MoviesGrid = (props) => {
 
 const mapState = (state) => {
     return {
-        movies: state.movies || [],
-        activeMovies: state.activeMovies,
+        movies: state.filter.type ? state.filter.movies : state.movies || []
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchMovies: () => dispatch(fetchMovies())
+        fetchMovies: () => dispatch(fetchMovies()),
+        showMovieDetails: (movieDetails) => dispatch(showMovieDetails(movieDetails))
     }
 };
 

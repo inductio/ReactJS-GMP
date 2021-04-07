@@ -94,7 +94,8 @@ const AddMovieFormik = (props) => {
 
 const mapState = (state) => {
     return {
-        genres: state.genres
+        genres: state.genres,
+        movies: state.movies
     }
 };
 

@@ -7,7 +7,7 @@ const MoviesCounter = ({counter}) => (
 
 const mapState = (state) => {
     return {
-        counter: (state.activeMovies.length || state.movies.length)
+        counter: state.filter.type ? state.filter.movies.length : state.movies.length
     }
 };
 
