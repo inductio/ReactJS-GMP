@@ -1,25 +1,32 @@
-import jsonPlaceholder from '../apis/jsonPlaceholder';
+import apiUrl from '../apis/apiUrl';
+import _ from 'lodash';
 import { byDate, byRating, byRuntime, byGenre } from './../components/utils/sortUtils';
 import { getFilterValues, getFilteredMovies } from './../components/utils/filterUtils';
 
 export const fetchMovies = () => async dispatch => {
-    const response = await jsonPlaceholder.get('/');
-    const movies = response.data;
+    const response = await apiUrl.get('/');
+    const movies = response.data.data;
     const genres = getFilterValues([...movies]);
     dispatch({type: 'SET_MOVIES', payload: movies});
     dispatch({type: 'SET_GENRES', payload: genres});
 };
 
 export const addMovieRequest = data => async dispatch => {
-    await jsonPlaceholder.post(`/`, data);
+    const response = await apiUrl.post('/', data);
+    dispatch({type: 'UPDATE_WITH_NEW_MOVIE', payload: response.data});
+    dispatch(showModal(null, null))
 };
 
-export const editMovieRequest = (id, data) => async dispatch => {
-    await jsonPlaceholder.patch(`/${id}`, data);
+export const editMovieRequest = (id, data) => async (dispatch) => {
+    data = _.extend(data, {id});
+    await apiUrl.put('/', data);
+    dispatch({type: 'SET_FILTER', payload: {type: null, movies: []}});
+    dispatch({type: 'UPDATE_MOVIES', payload: data});
+    dispatch(showModal(null, null))
 };
 
 export const deleteMovieRequest = id => async dispatch => {
-    await jsonPlaceholder.delete(`/${id}`);
+    await apiUrl.delete(`/${id}`);
 };
 
 export const showModal = (modalType, modalMovieId) => {
@@ -30,7 +37,7 @@ export const showMovieDetails = (movieDetails) => {
     return {type: 'SHOW_MOVIE_DETAILS', payload: movieDetails}
 };
 
-export const sortMovies = (type, movies) => {
+export const sortMovies = (type, movies) => dispatch => {
     const sortMovies = [...movies];
     const sortMapStrategy = new Map([
         ['Release Date', () => sortMovies.sort(byDate)],
@@ -39,18 +46,12 @@ export const sortMovies = (type, movies) => {
         ['Genre', () => sortMovies.sort(byGenre)]
     ]);
 
-    return {type: 'SET_ACTIVE_MOVIES', payload: sortMapStrategy.get(type)()}
+    dispatch({type: 'SET_FILTER', payload: {type: null, movies: []}});
+    dispatch({type: 'SET_MOVIES', payload: sortMapStrategy.get(type)()});
 };
 
-export const setFilter = filter => {
-    return {type: 'SET_FILTER', payload: filter};
-};
-
-export const filterMovies = (movies, filter) => {
-    if (!filter) {
-        return {type: 'SET_ACTIVE_MOVIES', payload: movies};
-    }
-
+export const setFilter = (filter, movies) => {
     const filteredMovies = getFilteredMovies([...movies], filter);
-    return {type: 'SET_ACTIVE_MOVIES', payload: [...filteredMovies]};
+
+    return {type: 'SET_FILTER', payload: {type: filter, movies: filteredMovies}};
 };

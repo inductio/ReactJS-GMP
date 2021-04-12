@@ -45,6 +45,10 @@
 		border: 0;
 	}
 
+	&__input.error {
+		border: 1px solid red;
+	}
+
 	&__buttons {
 		display: flex;
 		justify-content: flex-end;
