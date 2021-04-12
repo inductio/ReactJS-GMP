@@ -17,24 +17,24 @@ const App = () => {
     return (
         <React.Fragment>
             <Router>
-            <Switch>
-                <Route exact path="/">
-                    <Header />
-                    <Main />
-                </Route>
-                <Route path="/search/:SearchQuery">
-                    <Header />
-                    <Main />
-                </Route>
-                <Route path="/film/:id">
-                    <MovieDetails />
-                    <Main />
-                </Route>
+                <Switch>
+                    <Route exact path="/">
+                        <Header/>
+                        <Main/>
+                    </Route>
+                    <Route path="/search/:SearchQuery">
+                        <Header/>
+                        <Main/>
+                    </Route>
+                    <Route path="/film/:MovieId">
+                        <MovieDetails/>
+                        <Main/>
+                    </Route>
 
-                <Route path="*">
-                    <PageNotFound />
-                </Route>
-            </Switch>
+                    <Route path="*">
+                        <PageNotFound/>
+                    </Route>
+                </Switch>
             </Router>
             <Footer/>
             <Modal/>

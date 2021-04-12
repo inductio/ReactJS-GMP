@@ -1,9 +1,22 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import '../../styles/movieDetails.scss';
 import { connect } from 'react-redux';
-import { showMovieDetails } from '../../actions';
+import { showMovieDetails, fetchMovieDetails } from '../../actions';
+import { useParams } from "react-router";
+import { useHistory } from 'react-router-dom';
 
 const MovieDetails = (props) => {
+    const { MovieId } = useParams();
+    //const browserHistory = useHistory();
+
+    useEffect(() => {
+        props.fetchMovieDetails(MovieId);
+    }, [MovieId]);
+
+    if (!props.selectedMovie) {
+        return null;
+    }
+
     const {title, tagline, overview, runtime, vote_average, release_date, poster_path} = props.selectedMovie;
 
     return (
@@ -31,10 +44,17 @@ const MovieDetails = (props) => {
     )
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
     return {
-        hideMovieDetails: () => dispatch(showMovieDetails(null))
+        selectedMovie: state.movieDetails
     }
 };
 
-export default connect(null, mapDispatchToProps)(MovieDetails);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        hideMovieDetails: () => dispatch(showMovieDetails(null)),
+        fetchMovieDetails: id => dispatch(fetchMovieDetails(id))
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieDetails);

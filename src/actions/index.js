@@ -3,20 +3,18 @@ import _ from 'lodash';
 import { byDate, byRating, byRuntime, byGenre } from './../components/utils/sortUtils';
 import { getFilterValues, getFilteredMovies } from './../components/utils/filterUtils';
 
-export const fetchMovies = () => async dispatch => {
-    const response = await apiUrl.get('/');
+export const fetchMoviesByQuery = query => async dispatch => {
+    const response = await apiUrl.get(`/?search=${query}&searchBy=title`);
     const movies = response.data.data;
     const genres = getFilterValues([...movies]);
     dispatch({type: 'SET_MOVIES', payload: movies});
     dispatch({type: 'SET_GENRES', payload: genres});
 };
 
-export const fetchMoviesByQuery = (query) => async dispatch => {
-    const response = await apiUrl.get(`/?search=${query}&searchBy=title`);
-    const movies = response.data.data;
-    const genres = getFilterValues([...movies]);
-    dispatch({type: 'SET_MOVIES', payload: movies});
-    dispatch({type: 'SET_GENRES', payload: genres});
+export const fetchMovieDetails = id => async dispatch => {
+    const response = await apiUrl.get(`/${id}`);
+    console.log(response.data);
+    dispatch({type: 'SHOW_MOVIE_DETAILS', payload: response.data});
 };
 
 export const addMovieRequest = data => async dispatch => {

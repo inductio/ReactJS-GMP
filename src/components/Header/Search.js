@@ -9,9 +9,12 @@ const Search = () => {
     return <Formik
         initialValues={{searchMovie: ''}}
         onSubmit={(values) => {
-            browserHistory.push({
-                pathname: `/search/${values.searchMovie}`,
-            })
+            const query = values.searchMovie;
+            if (query) {
+                browserHistory.push({
+                    pathname: `/search/${values.searchMovie}`,
+                })
+            }
         }}
     >
         <Form className="search">

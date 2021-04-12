@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import MovieCard from '../movie/MovieCard';
 import { connect } from 'react-redux';
-import { fetchMoviesByQuery } from '../../actions';
-import { showMovieDetails } from '../../actions';
+import { fetchMoviesByQuery, showMovieDetails} from '../../actions';
 import { useParams } from "react-router";
 
 const MoviesGrid = (props) => {
@@ -10,9 +9,7 @@ const MoviesGrid = (props) => {
     const { SearchQuery } = useParams();
 
     useEffect(() => {
-        if (SearchQuery) {
-            fetchMoviesByQuery(SearchQuery);
-        }
+        fetchMoviesByQuery(SearchQuery);
     }, [SearchQuery]);
 
     if (!movies.length) {
