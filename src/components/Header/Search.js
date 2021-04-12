@@ -1,11 +1,24 @@
 import React from 'react';
+import { Formik, Form, Field } from 'formik';
+import { useHistory } from 'react-router-dom';
 import '../../styles/search.scss';
 
-const Search = () => (
-    <form className="search">
-        <input type="text" className="search__input" placeholder="What do you want to watch?"/>
-        <button type="submit" className="search__submit">Search</button>
-    </form>
-);
+const Search = () => {
+    const browserHistory = useHistory();
+
+    return <Formik
+        initialValues={{searchMovie: ''}}
+        onSubmit={(values) => {
+            browserHistory.push({
+                pathname: `/search/${values.searchMovie}`,
+            })
+        }}
+    >
+        <Form className="search">
+            <Field type="text" className="search__input" name="searchMovie" placeholder="What do you want to watch?"/>
+            <button type="submit" className="search__submit">Search</button>
+        </Form>
+    </Formik>
+};
 
 export default Search;

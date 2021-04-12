@@ -11,6 +11,14 @@ export const fetchMovies = () => async dispatch => {
     dispatch({type: 'SET_GENRES', payload: genres});
 };
 
+export const fetchMoviesByQuery = (query) => async dispatch => {
+    const response = await apiUrl.get(`/?search=${query}&searchBy=title`);
+    const movies = response.data.data;
+    const genres = getFilterValues([...movies]);
+    dispatch({type: 'SET_MOVIES', payload: movies});
+    dispatch({type: 'SET_GENRES', payload: genres});
+};
+
 export const addMovieRequest = data => async dispatch => {
     const response = await apiUrl.post('/', data);
     dispatch({type: 'UPDATE_WITH_NEW_MOVIE', payload: response.data});

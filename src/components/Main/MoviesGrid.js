@@ -1,14 +1,19 @@
 import React, { useEffect } from 'react';
 import MovieCard from '../movie/MovieCard';
 import { connect } from 'react-redux';
-import { fetchMovies } from '../../actions';
+import { fetchMoviesByQuery } from '../../actions';
 import { showMovieDetails } from '../../actions';
+import { useParams } from "react-router";
 
 const MoviesGrid = (props) => {
-    const {movies, fetchMovies, showMovieDetails} = props;
+    const { movies, fetchMoviesByQuery, showMovieDetails } = props;
+    const { SearchQuery } = useParams();
+
     useEffect(() => {
-        fetchMovies();
-        }, []);
+        if (SearchQuery) {
+            fetchMoviesByQuery(SearchQuery);
+        }
+    }, [SearchQuery]);
 
     if (!movies.length) {
         return null;
@@ -34,8 +39,8 @@ const mapState = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchMovies: () => dispatch(fetchMovies()),
-        showMovieDetails: (movieDetails) => dispatch(showMovieDetails(movieDetails))
+        fetchMoviesByQuery: query => dispatch(fetchMoviesByQuery(query)),
+        showMovieDetails: movieDetails => dispatch(showMovieDetails(movieDetails))
     }
 };
 
