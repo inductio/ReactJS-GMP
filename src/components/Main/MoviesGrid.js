@@ -6,11 +6,11 @@ import { useParams } from "react-router";
 
 const MoviesGrid = (props) => {
     const { movies, fetchMoviesByQuery, showMovieDetails } = props;
-    const { SearchQuery } = useParams();
+    const { query } = useParams();
 
     useEffect(() => {
-        fetchMoviesByQuery(SearchQuery);
-    }, [SearchQuery]);
+        fetchMoviesByQuery(query);
+    }, [query]);
 
     if (!movies.length) {
         return null;

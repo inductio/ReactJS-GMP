@@ -13,7 +13,6 @@ export const fetchMoviesByQuery = query => async dispatch => {
 
 export const fetchMovieDetails = id => async dispatch => {
     const response = await apiUrl.get(`/${id}`);
-    console.log(response.data);
     dispatch({type: 'SHOW_MOVIE_DETAILS', payload: response.data});
 };
 

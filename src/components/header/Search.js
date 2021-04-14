@@ -7,18 +7,17 @@ const Search = () => {
     const browserHistory = useHistory();
 
     return <Formik
-        initialValues={{searchMovie: ''}}
+        initialValues={{query: ''}}
         onSubmit={(values) => {
-            const query = values.searchMovie;
+            const query = values.query;
+
             if (query) {
-                browserHistory.push({
-                    pathname: `/search/${values.searchMovie}`,
-                })
+                browserHistory.push(`/search/${query}`)
             }
         }}
     >
         <Form className="search">
-            <Field type="text" className="search__input" name="searchMovie" placeholder="What do you want to watch?"/>
+            <Field type="text" className="search__input" name="query" placeholder="What do you want to watch?"/>
             <button type="submit" className="search__submit">Search</button>
         </Form>
     </Formik>

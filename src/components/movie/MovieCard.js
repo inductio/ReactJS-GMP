@@ -10,7 +10,6 @@ const MovieCard = (props) => {
 
     const onCardClick = () => {
         browserHistory.push(`/film/${id}`);
-        //props.showMovieDetails(props.movie);
     };
 
     return (

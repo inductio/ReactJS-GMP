@@ -1,39 +1,25 @@
 import React from 'react';
-import '../styles/common.scss';
-import Header from './Header';
-import Main from './Main';
+import SearchLayout from './layouts/SearchLayout';
+import MovieDetailsLayout from './layouts/MovieDetailsLayout';
 import Footer from './Footer';
 import Modal from './Modal';
-
 import PageNotFound from './PageNotFound';
 import {
     BrowserRouter as Router,
     Switch,
     Route
 } from "react-router-dom";
-import MovieDetails from './movie/MovieDetails';
+import '../styles/common.scss';
 
 const App = () => {
     return (
         <React.Fragment>
             <Router>
                 <Switch>
-                    <Route exact path="/">
-                        <Header/>
-                        <Main/>
-                    </Route>
-                    <Route path="/search/:SearchQuery">
-                        <Header/>
-                        <Main/>
-                    </Route>
-                    <Route path="/film/:MovieId">
-                        <MovieDetails/>
-                        <Main/>
-                    </Route>
-
-                    <Route path="*">
-                        <PageNotFound/>
-                    </Route>
+                    <Route exact path="/" component={SearchLayout} />
+                    <Route path="/search/:query" component={SearchLayout} />
+                    <Route path="/film/:id" component={MovieDetailsLayout} />
+                    <Route path="*" component={PageNotFound} />
                 </Switch>
             </Router>
             <Footer/>

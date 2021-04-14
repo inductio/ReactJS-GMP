@@ -3,15 +3,13 @@ import '../../styles/movieDetails.scss';
 import { connect } from 'react-redux';
 import { showMovieDetails, fetchMovieDetails } from '../../actions';
 import { useParams } from "react-router";
-import { useHistory } from 'react-router-dom';
 
 const MovieDetails = (props) => {
-    const { MovieId } = useParams();
-    //const browserHistory = useHistory();
+    const { id } = useParams();
 
     useEffect(() => {
-        props.fetchMovieDetails(MovieId);
-    }, [MovieId]);
+        props.fetchMovieDetails(id);
+    }, [id]);
 
     if (!props.selectedMovie) {
         return null;
