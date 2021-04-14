@@ -1,11 +1,13 @@
 import React, {useEffect} from 'react';
-import '../../styles/movieDetails.scss';
 import { connect } from 'react-redux';
-import { showMovieDetails, fetchMovieDetails } from '../../actions';
-import { useParams } from "react-router";
+import { fetchMovieDetails } from '../../actions';
+import { useParams } from 'react-router';
+import { useHistory } from 'react-router-dom';
+import '../../styles/movieDetails.scss';
 
 const MovieDetails = (props) => {
     const { id } = useParams();
+    const browserHistory = useHistory();
 
     useEffect(() => {
         props.fetchMovieDetails(id);
@@ -37,7 +39,7 @@ const MovieDetails = (props) => {
                 </div>
 
             </div>
-            <button className="movie-details__back" onClick={() => props.hideMovieDetails()} title="Back to Search"/>
+            <button className="movie-details__back" onClick={() => browserHistory.push('/')} title="Back to Search"/>
         </div>
     )
 };
@@ -50,7 +52,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        hideMovieDetails: () => dispatch(showMovieDetails(null)),
         fetchMovieDetails: id => dispatch(fetchMovieDetails(id))
     }
 };

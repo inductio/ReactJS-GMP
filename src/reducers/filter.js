@@ -1,12 +1,9 @@
-const initialState = {
-    type: '',
-    movies: []
-};
+const initialState = '';
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case  'SET_FILTER':
-            return {type: action.payload.type, movies: [...action.payload.movies]};
+        case  'SET_FILTER_TYPE':
+            return action.payload;
         default:
             return state;
     }

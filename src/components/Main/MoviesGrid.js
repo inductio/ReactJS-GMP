@@ -9,7 +9,9 @@ const MoviesGrid = (props) => {
     const { query } = useParams();
 
     useEffect(() => {
-        fetchMoviesByQuery(query);
+        if (query) {
+            fetchMoviesByQuery(query);
+        }
     }, [query]);
 
     if (!movies.length) {
@@ -30,7 +32,7 @@ const MoviesGrid = (props) => {
 
 const mapState = (state) => {
     return {
-        movies: state.filter.type ? state.filter.movies : state.movies || []
+        movies: state.movies || []
     }
 };
 

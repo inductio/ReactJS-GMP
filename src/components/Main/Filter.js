@@ -30,7 +30,7 @@ const mapState = (state) => {
     return {
         movies: state.movies,
         genres: state.genres,
-        filter: state.filter.type || ''
+        filter: state.filter || ''
     }
 };
 
