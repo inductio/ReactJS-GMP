@@ -2,11 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MovieCardMenu from './MovieCardMenu';
 import '../../styles/movieCard.scss';
+import { useHistory } from 'react-router-dom';
 
 const MovieCard = (props) => {
-    const {title, release_date, genres, poster_path} = props.movie;
+    const {title, release_date, genres, poster_path, id} = props.movie;
+    const browserHistory = useHistory();
+
+    const onCardClick = () => {
+        browserHistory.push(`/film/${id}`);
+    };
+
     return (
-        <div className="movie-card" onClick={() => props.showMovieDetails(props.movie)}>
+        <div className="movie-card" onClick={onCardClick}>
             <img
                 className="movie-card__img"
                 src={poster_path}

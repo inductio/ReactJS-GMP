@@ -1,9 +1,22 @@
-import React from 'react';
-import '../../styles/movieDetails.scss';
+import React, {useEffect} from 'react';
 import { connect } from 'react-redux';
-import { showMovieDetails } from '../../actions';
+import { fetchMovieDetails } from '../../actions';
+import { useParams } from 'react-router';
+import { useHistory } from 'react-router-dom';
+import '../../styles/movieDetails.scss';
 
 const MovieDetails = (props) => {
+    const { id } = useParams();
+    const browserHistory = useHistory();
+
+    useEffect(() => {
+        props.fetchMovieDetails(id);
+    }, [id]);
+
+    if (!props.selectedMovie) {
+        return null;
+    }
+
     const {title, tagline, overview, runtime, vote_average, release_date, poster_path} = props.selectedMovie;
 
     return (
@@ -26,15 +39,21 @@ const MovieDetails = (props) => {
                 </div>
 
             </div>
-            <button className="movie-details__back" onClick={() => props.hideMovieDetails()} title="Back to Search"/>
+            <button className="movie-details__back" onClick={() => browserHistory.push('/')} title="Back to Search"/>
         </div>
     )
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
     return {
-        hideMovieDetails: () => dispatch(showMovieDetails(null))
+        selectedMovie: state.movieDetails
     }
 };
 
-export default connect(null, mapDispatchToProps)(MovieDetails);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchMovieDetails: id => dispatch(fetchMovieDetails(id))
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieDetails);
