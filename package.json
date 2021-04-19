@@ -10,8 +10,10 @@
     "react-redux": "^7.2.2",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
+    "react-test-renderer": "^17.0.2",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "renderer": "^0.1.5",
     "yup": "^0.32.9"
   },
   "devDependencies": {
@@ -40,6 +42,8 @@
     "start": "webpack serve --node-env development",
     "build:dev": "webpack --node-env development",
     "build:prod": "webpack --node-env production",
-    "test": "jest"
+    "test": "jest",
+    "test:coverage": "jest --collect-coverage"
   }
 }
+
