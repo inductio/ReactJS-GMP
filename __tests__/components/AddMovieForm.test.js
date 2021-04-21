@@ -148,7 +148,7 @@ describe('Add Movie Form', () => {
             });
         });
 
-        await act(async () => tree.find('form').simulate('submit');
+        await act(async () => tree.find('form').simulate('submit'));
 
         expect(dispatch).toHaveBeenCalled();
     });
