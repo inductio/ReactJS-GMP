@@ -1,15 +1,3 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './components/App';
-import store from './store';
-import { Provider } from 'react-redux';
-import ErrorBoundary from './components/common/ErrorBoundary';
+import './styles/common.scss';
 
-ReactDOM.render(
-    <ErrorBoundary>
-        <Provider store={store}>
-            <App/>
-        </Provider>
-    </ErrorBoundary>,
-    document.getElementById('root')
-);
+console.log('HELLO WORLD!!!');

@@ -1,19 +1,9 @@
-@import 'variables.scss';
+/**
+Style here
+ */
 
 body {
-	background-color: $color-light-gray;
-	font-family: $font-family;
-	margin: 0;
-	color: $color-white;
-}
-
-ul {
-	margin: 0;
-	padding: 0;
-	list-style-type: none;
-}
-
-.container {
-	width: 1200px;
-	margin: 0 auto;
+	p {
+		color: red;
+	}
 }
